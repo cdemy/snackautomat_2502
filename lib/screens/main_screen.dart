@@ -16,6 +16,8 @@ class MainScreen extends StatelessWidget {
 }
 
 class VendingMachineScreen extends StatelessWidget {
+  const VendingMachineScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +74,8 @@ class VendingMachineScreen extends StatelessWidget {
 
 // ProductsView Widget
 class ProductsView extends StatelessWidget {
+  const ProductsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -94,6 +98,8 @@ class ProductsView extends StatelessWidget {
 
 // MoneyDisplayInput Widget
 class MoneyDisplayInput extends StatelessWidget {
+  const MoneyDisplayInput({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -116,6 +122,8 @@ class MoneyDisplayInput extends StatelessWidget {
 
 // MoneyDisplayPrice Widget
 class MoneyDisplayPrice extends StatelessWidget {
+  const MoneyDisplayPrice({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -138,6 +146,8 @@ class MoneyDisplayPrice extends StatelessWidget {
 
 // CoinInput Widget
 class CoinInput extends StatelessWidget {
+  const CoinInput({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -160,6 +170,8 @@ class CoinInput extends StatelessWidget {
 
 // MoneyDisplayOutput Widget
 class MoneyDisplayOutput extends StatelessWidget {
+  const MoneyDisplayOutput({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
