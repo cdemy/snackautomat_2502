@@ -6,7 +6,7 @@ This document outlines a basic concept for a vending machine application using D
 
 1. Introduction
 
-A vending machine application built with Flutter would simulate the process of selecting a product, making a payment, and dispensing the item. It would provide a user-friendly interface suitable for mobile and potentially web platforms.
+    A vending machine application built with Flutter would simulate the process of selecting a product, making a payment, and dispensing the item. It would         provide a user-friendly interface suitable for mobile and potentially web platforms.
 
 2. Core Features
 
