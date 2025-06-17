@@ -1,4 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:snackauotmat_2502/widgets/products_view_widget.dart';
+import 'package:snackauotmat_2502/widgets/money_display_input_widget.dart';
+import 'package:snackauotmat_2502/widgets/money_display_price_widget.dart';
+import 'package:snackauotmat_2502/widgets/coin_input_widget.dart';
+import 'package:snackauotmat_2502/widgets/money_display_output_widget.dart';
+
+void main() {
+  runApp(
+    const ProviderScope(
+      child: MainScreen(),
+    ),
+  );
+}
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -66,126 +80,6 @@ class VendingMachineScreen extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// ProductsView Widget
-class ProductsView extends StatelessWidget {
-  const ProductsView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue[200],
-      child: Placeholder(
-        child: Center(
-          child: Text(
-            'ProductsView',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// MoneyDisplayInput Widget
-class MoneyDisplayInput extends StatelessWidget {
-  const MoneyDisplayInput({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.green[200],
-      child: Placeholder(
-        child: Center(
-          child: Text(
-            'MoneyDisplayInput',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// MoneyDisplayPrice Widget
-class MoneyDisplayPrice extends StatelessWidget {
-  const MoneyDisplayPrice({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.orange[200],
-      child: Placeholder(
-        child: Center(
-          child: Text(
-            'MoneyDisplayPrice',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// CoinInput Widget
-class CoinInput extends StatelessWidget {
-  const CoinInput({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.purple[200],
-      child: Placeholder(
-        child: Center(
-          child: Text(
-            'CoinInput',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// MoneyDisplayOutput Widget
-class MoneyDisplayOutput extends StatelessWidget {
-  const MoneyDisplayOutput({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red[200],
-      child: Placeholder(
-        child: Center(
-          child: Text(
-            'MoneyDisplayOutput',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
-          ),
         ),
       ),
     );
