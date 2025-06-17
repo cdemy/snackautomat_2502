@@ -74,7 +74,7 @@ class VendingMachineScreen extends StatelessWidget {
                   // Anzeige des Geldes im Restschacht
                   Expanded(
                     flex: 1,
-                    child: MoneyDisplayOutput(),
+                    child: MoneyDisplayOutputWidget(),
                   ),
                 ],
               ),

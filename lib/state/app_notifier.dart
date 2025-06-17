@@ -1,4 +1,3 @@
-// app_notifier.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackauotmat_2502/state/app_state.dart';
 
@@ -7,36 +6,19 @@ class AppNotifier extends StateNotifier<AppState> {
     : super(
         const AppState(
           availableSnacks: [
-            // Preise jetzt in Cents
-            Snack(
-              id: '1',
-              name: 'Schokolade',
-              price: 150,
-              quantity: 10,
-            ), // 1.50 € = 150 Cents
-            Snack(
-              id: '2',
-              name: 'Chips',
-              price: 120,
-              quantity: 5,
-            ), // 1.20 € = 120 Cents
-            Snack(
-              id: '3',
-              name: 'Cola',
-              price: 200,
-              quantity: 8,
-            ), // 2.00 € = 200 Cents
+            Snack(id: '1', name: 'Schokolade', price: 150, quantity: 10),
+            Snack(id: '2', name: 'Chips', price: 120, quantity: 5),
+            Snack(id: '3', name: 'Cola', price: 200, quantity: 8),
           ],
         ),
       );
 
   void addCredit(double amount) {
     if (amount <= 0) return;
-
     final int amountInCents = (amount * 100).round();
     state = state.copyWith(currentCredit: state.currentCredit + amountInCents);
     print(
-      'Guthaben hinzugefügt: $amount. Neues Guthaben: ${state.currentCredit / 100}', // Zur Anzeige zurück in Euro konvertieren
+      'Guthaben hinzugefügt: $amount. Neues Guthaben: ${state.currentCredit / 100}',
     );
   }
 
@@ -54,7 +36,7 @@ class AppNotifier extends StateNotifier<AppState> {
 
     if (state.currentCredit < snack.price) {
       print(
-        'Nicht genug Guthaben für "${snack.name}". Benötigt: ${snack.price / 100}, Aktuell: ${state.currentCredit / 100}', // Zur Anzeige konvertieren
+        'Nicht genug Guthaben für "${snack.name}". Benötigt: ${snack.price / 100}, Aktuell: ${state.currentCredit / 100}',
       );
       state = state.copyWith(
         selectedSnackId: snackId,
@@ -85,7 +67,7 @@ class AppNotifier extends StateNotifier<AppState> {
 
     if (state.currentCredit < snackToPurchase.price) {
       print(
-        'Nicht genug Guthaben für "${snackToPurchase.name}". Benötigt: ${snackToPurchase.price / 100}, Aktuell: ${state.currentCredit / 100}', // Zur Anzeige konvertieren
+        'Nicht genug Guthaben für "${snackToPurchase.name}". Benötigt: ${snackToPurchase.price / 100}, Aktuell: ${state.currentCredit / 100}',
       );
       return;
     }
@@ -106,7 +88,7 @@ class AppNotifier extends StateNotifier<AppState> {
     );
 
     print(
-      '"${snackToPurchase.name}" gekauft. Restguthaben: ${state.currentCredit / 100}', // Zur Anzeige konvertieren
+      '"${snackToPurchase.name}" gekauft. Restguthaben: ${state.currentCredit / 100}',
     );
   }
 
@@ -120,13 +102,28 @@ class AppNotifier extends StateNotifier<AppState> {
   void resetVendingMachine() {
     state = const AppState(
       availableSnacks: [
-        // Preise wieder in Cents
         Snack(id: '1', name: 'Schokolade', price: 150, quantity: 10),
         Snack(id: '2', name: 'Chips', price: 120, quantity: 5),
         Snack(id: '3', name: 'Cola', price: 200, quantity: 8),
       ],
+      currentCredit: 0,
+      selectedSnackId: null,
     );
     print('Snackautomat zurückgesetzt.');
+  }
+
+  void returnCredit() {
+    if (state.currentCredit > 0) {
+      final returnedAmountInEuro = state.currentCredit / 100.0;
+      state = state.copyWith(currentCredit: 0);
+      print(
+        'Guthaben zurückgegeben: ${returnedAmountInEuro.toStringAsFixed(2)} €',
+      );
+      print('Neues Guthaben: ${state.currentCredit / 100} €');
+    } else {
+      print('Kein Guthaben zum Zurückgeben vorhanden.');
+    }
+    state = state.copyWith(selectedSnackId: null);
   }
 }
 
