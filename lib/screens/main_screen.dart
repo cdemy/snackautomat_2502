@@ -68,7 +68,7 @@ class VendingMachineScreen extends StatelessWidget {
                   // Fläche für Buttons mit Münzen
                   Expanded(
                     flex: 2,
-                    child: CoinInput(),
+                    child: CoinInputWidget(),
                   ),
                   SizedBox(height: 8),
                   // Anzeige des Geldes im Restschacht
