@@ -17,7 +17,7 @@ class AppNotifier extends StateNotifier<AppState> {
     if (amount <= 0) return;
     state = state.copyWith(currentCredit: state.currentCredit + amount);
     print(
-      'Guthaben hinzugefügt: ${amount}. Neues Guthaben: ${state.currentCredit}',
+      'Guthaben hinzugefügt: $amount. Neues Guthaben: ${state.currentCredit}',
     );
   }
 
