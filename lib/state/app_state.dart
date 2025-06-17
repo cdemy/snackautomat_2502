@@ -1,10 +1,11 @@
+// app_state.dart
 import 'package:flutter/foundation.dart';
 
 @immutable
 class Snack {
   final String id;
   final String name;
-  final double price;
+  final int price; // Ändere von double zu int (Preis in Cents)
   final int quantity;
 
   const Snack({
@@ -14,7 +15,7 @@ class Snack {
     required this.quantity,
   });
 
-  Snack copyWith({String? id, String? name, double? price, int? quantity}) {
+  Snack copyWith({String? id, String? name, int? price, int? quantity}) {
     return Snack(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -43,21 +44,21 @@ class Snack {
   }
 }
 
-@immutable // Macht die Klasse unveränderlich
+@immutable
 class AppState {
   final List<Snack> availableSnacks;
-  final double currentCredit; // Aktuell eingeworfenes Geld
-  final String? selectedSnackId; // Das vom Nutzer ausgewählte Produkt
+  final int currentCredit; // Ändere von double zu int (Guthaben in Cents)
+  final String? selectedSnackId;
 
   const AppState({
     this.availableSnacks = const [],
-    this.currentCredit = 0.0,
+    this.currentCredit = 0, // Initialisiere mit 0 Cents
     this.selectedSnackId,
   });
 
   AppState copyWith({
     List<Snack>? availableSnacks,
-    double? currentCredit,
+    int? currentCredit, // Ändere hier auch zu int
     String? selectedSnackId,
   }) {
     return AppState(

@@ -1,8 +1,7 @@
-/// Represents a single product in the machine.
 class Product {
   final String name;
   final String url; // Internet url of image (including extension).
-  final int price; // Price in Euro cents.
+  final int price; // Price in Euro cents. <-- HIER ÄNDERN
   final int amount;
 
   /// Constructs a single product in the machine.

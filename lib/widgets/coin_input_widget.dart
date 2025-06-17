@@ -7,14 +7,11 @@ class CoinInputWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Eine Liste von Münzwerten,die als Buttons angezeigt werden.
     final List<double> coinValues = [0.10, 0.20, 0.50, 1.00, 2.00];
 
     return Container(
       color: Colors.purple[200],
-      padding: const EdgeInsets.all(
-        8.0,
-      ),
+      padding: const EdgeInsets.all(8.0),
       child: Center(
         child: Wrap(
           spacing: 8.0,
