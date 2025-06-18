@@ -1,23 +1,39 @@
-// MoneyDisplayPrice Widget
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:snackauotmat_2502/state/app_notifier.dart';
+// import 'package:snackauotmat_2502/state/app_state.dart';
 
-class MoneyDisplayPrice extends StatelessWidget {
-  const MoneyDisplayPrice({super.key});
+class MoneyDisplayPriceWidget extends ConsumerWidget {
+  const MoneyDisplayPriceWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Widget reagiert auf Zustandsänderungen
+    final appState = ref.watch(appNotifierProvider);
+
+    // Berechne den Warenkorbpreis in Cents und €
+    final totalCartPriceInCents = appState.cartItems.fold(
+      0,
+      (sum, item) => sum + (item.snack.price * item.quantity),
+    );
+    final totalCartPriceInEuro = totalCartPriceInCents / 100.0;
+
+    String displayPriceText;
+    if (totalCartPriceInEuro > 0) {
+      displayPriceText = 'Gesamt: ${totalCartPriceInEuro.toStringAsFixed(2)} €';
+    } else {
+      displayPriceText = 'Warenkorb leer';
+    }
+
     return Container(
       color: Colors.orange[200],
-      child: Placeholder(
-        child: Center(
-          child: Text(
-            'MoneyDisplayPrice',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
+      child: Center(
+        child: Text(
+          displayPriceText,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
           ),
         ),
       ),

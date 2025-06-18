@@ -1,22 +1,28 @@
-// MoneyDisplayInput Widget
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:snackauotmat_2502/state/app_notifier.dart';
 
-class MoneyDisplayInput extends StatelessWidget {
-  const MoneyDisplayInput({super.key});
+class MoneyDisplayInputWidget extends ConsumerWidget {
+  const MoneyDisplayInputWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appState = ref.watch(appNotifierProvider);
+
+    final currentCreditInCents = appState.currentCredit;
+    final currentCreditInEuro = currentCreditInCents / 100.0;
+    final displayText =
+        'Guthaben: ${currentCreditInEuro.toStringAsFixed(2)} €'; // Formatierter Anzeigetext
+
     return Container(
       color: Colors.green[200],
-      child: Placeholder(
-        child: Center(
-          child: Text(
-            'MoneyDisplayInput',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
+      child: Center(
+        child: Text(
+          displayText, // Zeigt das aktuelle Guthaben an
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
           ),
         ),
       ),

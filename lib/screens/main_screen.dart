@@ -1,78 +1,59 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+//import 'package:flutter_riverpod/flutter_riverpod.dart';
+// Alle Widgets (importiert)
 import 'package:snackauotmat_2502/widgets/products_view_widget.dart';
 import 'package:snackauotmat_2502/widgets/money_display_input_widget.dart';
 import 'package:snackauotmat_2502/widgets/money_display_price_widget.dart';
 import 'package:snackauotmat_2502/widgets/coin_input_widget.dart';
 import 'package:snackauotmat_2502/widgets/money_display_output_widget.dart';
 
-void main() {
-  runApp(
-    const ProviderScope(
-      child: MainScreen(),
-    ),
-  );
-}
-
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Vending Machine MVP',
-      theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
-      ),
-      home: VendingMachineScreen(),
-    );
-  }
-}
-
-class VendingMachineScreen extends StatelessWidget {
-  const VendingMachineScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vending Machine'),
+        title: const Text(
+          'Vending Machine',
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(
+          16.0,
+        ),
         child: Row(
           children: [
-            // Linke zwei Drittel: ProductsView
-            Expanded(
+            const Expanded(
               flex: 2,
-              child: ProductsView(),
+              child: ProductsViewWidget(),
             ),
-            SizedBox(width: 16),
-            // Rechtes Drittel: Control Panel
+            const SizedBox(
+              width: 16,
+            ),
             Expanded(
               flex: 1,
               child: Column(
                 children: [
-                  // Anzeige des eingeworfenen Betrags
-                  Expanded(
+                  const Expanded(
                     flex: 1,
-                    child: MoneyDisplayInput(),
+                    child: MoneyDisplayInputWidget(),
                   ),
-                  SizedBox(height: 8),
-                  // Anzeige des nötigen Betrages
-                  Expanded(
+                  const SizedBox(height: 8),
+
+                  const Expanded(
                     flex: 1,
-                    child: MoneyDisplayPrice(),
+                    child: MoneyDisplayPriceWidget(),
                   ),
-                  SizedBox(height: 8),
-                  // Fläche für Buttons mit Münzen
-                  Expanded(
+                  const SizedBox(height: 8),
+
+                  const Expanded(
                     flex: 2,
                     child: CoinInputWidget(),
                   ),
-                  SizedBox(height: 8),
-                  // Anzeige des Geldes im Restschacht
-                  Expanded(
+                  const SizedBox(height: 8),
+
+                  const Expanded(
                     flex: 1,
                     child: MoneyDisplayOutputWidget(),
                   ),
