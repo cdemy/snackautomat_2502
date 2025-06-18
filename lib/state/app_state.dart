@@ -1,11 +1,11 @@
-// app_state.dart
 import 'package:flutter/foundation.dart';
+import 'package:snackauotmat_2502/state/cart_item.dart';
 
-@immutable
+@immutable // Klasse kann nicht verändert werden
 class Snack {
   final String id;
   final String name;
-  final int price; // Ändere von double zu int (Preis in Cents)
+  final int price;
   final int quantity;
 
   const Snack({
@@ -44,27 +44,27 @@ class Snack {
   }
 }
 
-@immutable
+@immutable // Klasse kann nicht verändert werden
 class AppState {
   final List<Snack> availableSnacks;
-  final int currentCredit; // Ändere von double zu int (Guthaben in Cents)
-  final String? selectedSnackId;
+  final int currentCredit;
+  final List<CartItem> cartItems;
 
   const AppState({
     this.availableSnacks = const [],
-    this.currentCredit = 0, // Initialisiere mit 0 Cents
-    this.selectedSnackId,
+    this.currentCredit = 0,
+    this.cartItems = const [],
   });
 
   AppState copyWith({
     List<Snack>? availableSnacks,
-    int? currentCredit, // Ändere hier auch zu int
-    String? selectedSnackId,
+    int? currentCredit,
+    List<CartItem>? cartItems,
   }) {
     return AppState(
       availableSnacks: availableSnacks ?? this.availableSnacks,
       currentCredit: currentCredit ?? this.currentCredit,
-      selectedSnackId: selectedSnackId ?? this.selectedSnackId,
+      cartItems: cartItems ?? this.cartItems,
     );
   }
 
@@ -78,16 +78,17 @@ class AppState {
             other.availableSnacks,
           ) &&
           currentCredit == other.currentCredit &&
-          selectedSnackId == other.selectedSnackId;
+          listEquals(
+            cartItems,
+            other.cartItems,
+          );
 
   @override
   int get hashCode =>
-      availableSnacks.hashCode ^
-      currentCredit.hashCode ^
-      selectedSnackId.hashCode;
+      availableSnacks.hashCode ^ currentCredit.hashCode ^ cartItems.hashCode;
 
   @override
   String toString() {
-    return 'AppState{availableSnacks: $availableSnacks, currentCredit: $currentCredit, selectedSnackId: $selectedSnackId}';
+    return 'AppState{availableSnacks: $availableSnacks, currentCredit: $currentCredit, cartItems: $cartItems}';
   }
 }

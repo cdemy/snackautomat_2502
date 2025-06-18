@@ -5,7 +5,7 @@ import 'screens/main_screen.dart';
 void main() {
   runApp(
     const ProviderScope(
-      child: MyApp(), // Haupt App Klasse
+      child: MyApp(),
     ),
   );
 }
@@ -16,8 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vending Mashine App',
-      home: MainScreen(), // Dein Start-Bildschirm
+      title: 'Vending Machine App',
+      theme: ThemeData(
+        primarySwatch: Colors.lightGreen,
+      ),
+      home: MainScreen(),
     );
   }
 }
