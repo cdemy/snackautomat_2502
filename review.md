@@ -7,3 +7,4 @@ Refactor snack vending machine application structure and state management
 - Removed updated Snack model JSON serialization methods and added a TODO :P.
 - Updated project structure to enhance scalability and maintainability.
 - 100% fail rate in tests, need to fix this!
+- Check the doc folder, your project is missing Comments
