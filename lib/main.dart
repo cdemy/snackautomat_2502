@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snackauotmat_2502/theme/vending_theme.dart';
 import 'screens/main_screen.dart';
 
 void main() {
@@ -11,8 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vending Mashine App',
-      home: MainScreen(), //
+      title: 'Vending Machine',
+      theme: lightVendingMachineTheme,
+      darkTheme: darkVendingMachineTheme,
+      themeMode: ThemeMode.dark,
+      home: MainScreen(),
     );
   }
 }

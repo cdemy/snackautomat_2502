@@ -1,27 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:snackauotmat_2502/theme/theme_extentions.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Vending Machine MVP',
-      theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
-      ),
-      home: VendingMachineScreen(),
-    );
+    return VendingMachineScreen();
   }
 }
 
 class VendingMachineScreen extends StatelessWidget {
+  const VendingMachineScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Vending Machine'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
@@ -51,7 +44,7 @@ class VendingMachineScreen extends StatelessWidget {
                   SizedBox(height: 8),
                   // Fläche für Buttons mit Münzen
                   Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: CoinInput(),
                   ),
                   SizedBox(height: 8),
@@ -75,16 +68,11 @@ class ProductsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue[200],
+      color: context.appColors.productsViewBackground,
       child: Placeholder(
         child: Center(
           child: Text(
             'ProductsView',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
           ),
         ),
       ),
@@ -97,16 +85,11 @@ class MoneyDisplayInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green[200],
+      color: context.appColors.moneyDisplayInputBackground,
       child: Placeholder(
         child: Center(
           child: Text(
             'MoneyDisplayInput',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
           ),
         ),
       ),
@@ -124,11 +107,6 @@ class MoneyDisplayPrice extends StatelessWidget {
         child: Center(
           child: Text(
             'MoneyDisplayPrice',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
           ),
         ),
       ),
@@ -146,11 +124,6 @@ class CoinInput extends StatelessWidget {
         child: Center(
           child: Text(
             'CoinInput',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
           ),
         ),
       ),
@@ -168,11 +141,6 @@ class MoneyDisplayOutput extends StatelessWidget {
         child: Center(
           child: Text(
             'MoneyDisplayOutput',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-            ),
           ),
         ),
       ),
