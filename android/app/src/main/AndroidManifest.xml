@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="snackauotmat_2502"
+        android:label="snackautomat_2502"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

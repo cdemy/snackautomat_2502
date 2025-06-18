@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:snackauotmat_2502/state/app_notifier.dart';
+import 'package:snackautomat_2502/domain/providers/_providers.dart';
 
 class MoneyDisplayOutputWidget extends ConsumerWidget {
   const MoneyDisplayOutputWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appState = ref.watch(appNotifierProvider);
-    final appNotifier = ref.read(appNotifierProvider.notifier);
+    final appState = ref.watch(appStateProvider);
+    final appNotifier = ref.read(appStateProvider.notifier);
 
     final currentCreditInCents = appState.currentCredit;
     final currentCreditInEuro = currentCreditInCents / 100.0;

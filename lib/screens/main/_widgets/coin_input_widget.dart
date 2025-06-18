@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:snackauotmat_2502/state/app_notifier.dart';
+import 'package:snackautomat_2502/domain/providers/_providers.dart';
 
 class CoinInputWidget extends ConsumerWidget {
   const CoinInputWidget({super.key});
@@ -20,7 +20,7 @@ class CoinInputWidget extends ConsumerWidget {
           children: coinValues.map((value) {
             return ElevatedButton(
               onPressed: () {
-                ref.read(appNotifierProvider.notifier).addCredit(value);
+                ref.read(appStateProvider.notifier).addCredit(value);
               },
               child: Text(
                 '${value.toStringAsFixed(2)} €',

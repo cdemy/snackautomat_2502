@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:snackauotmat_2502/state/app_state.dart';
+import 'package:snackautomat_2502/domain/state/app_state.dart';
+import 'package:snackautomat_2502/models/snack.dart';
 
-class AppNotifier extends StateNotifier<AppState> {
-  AppNotifier()
+class AppStateNotifier extends StateNotifier<AppState> {
+  AppStateNotifier()
     : super(
         const AppState(
           availableSnacks: [
@@ -126,7 +127,3 @@ class AppNotifier extends StateNotifier<AppState> {
     state = state.copyWith(selectedSnackId: null);
   }
 }
-
-final appNotifierProvider = StateNotifierProvider<AppNotifier, AppState>((ref) {
-  return AppNotifier();
-});

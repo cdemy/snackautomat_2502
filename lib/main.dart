@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'screens/main_screen.dart';
+import 'package:snackautomat_2502/app.dart';
+import 'screens/main/main_screen.dart';
 
 void main() {
   runApp(
@@ -8,16 +9,4 @@ void main() {
       child: MyApp(), // Haupt App Klasse
     ),
   );
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Vending Mashine App',
-      home: MainScreen(), // Dein Start-Bildschirm
-    );
-  }
 }

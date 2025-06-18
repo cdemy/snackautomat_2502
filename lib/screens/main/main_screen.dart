@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:snackauotmat_2502/widgets/products_view_widget.dart';
-import 'package:snackauotmat_2502/widgets/money_display_input_widget.dart';
-import 'package:snackauotmat_2502/widgets/money_display_price_widget.dart';
-import 'package:snackauotmat_2502/widgets/coin_input_widget.dart';
-import 'package:snackauotmat_2502/widgets/money_display_output_widget.dart';
+import 'package:snackautomat_2502/screens/main/_widgets/products_view_widget.dart';
+import 'package:snackautomat_2502/screens/main/_widgets/money_display_input_widget.dart';
+import 'package:snackautomat_2502/screens/main/_widgets/money_display_price_widget.dart';
+import 'package:snackautomat_2502/screens/main/_widgets/coin_input_widget.dart';
+import 'package:snackautomat_2502/screens/main/_widgets/money_display_output_widget.dart';
 
 void main() {
   runApp(
