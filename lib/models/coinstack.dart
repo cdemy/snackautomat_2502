@@ -2,7 +2,11 @@
 class CoinStack {
   static const Set<int> potentialCoinValues = {1, 2, 5, 10, 20, 50, 100, 200};
   final Map<int, int> _coins;
-  CoinStack(this._coins);
+  const CoinStack([this._coins = const {}]);
+
+  CoinStack.fromInt(int value)
+    : _coins = {value: 1},
+      assert(potentialCoinValues.contains(value), "CoinStack not valid");
 
   // Returns access to coins (public map)
   Map<int, int> get coins => _coins;
@@ -31,34 +35,43 @@ class CoinStack {
   }
 
   // Add the coin to the stack
-  void addInt(int value) {
-    if (!potentialCoinValues.contains(value)) return;
-    _coins[value] = (_coins[value] ?? 0) + 1;
-  }
+  CoinStack addInt(int value) => merge(CoinStack.fromInt(value));
 
   // Add coins to the stack
-  void addInts(List<int> values) {
+  CoinStack addInts(List<int> values) {
+    CoinStack coinStack = copy();
     for (var value in values) {
-      addInt(value);
+      coinStack = coinStack.addInt(value);
     }
+    return coinStack;
   }
+
+  CoinStack copy() => CoinStack(Map.from(_coins));
 
   // Remove the coin from the stack
-  void removeInt(int value) {
-    if (!potentialCoinValues.contains(value)) return;
-    if ((_coins[value] ?? 0) <= 0) return;
-    _coins[value] = (_coins[value] ?? 0) - 1;
+  CoinStack removeInt(int value) {
+    if (!potentialCoinValues.contains(value)) {
+      throw ArgumentError("Coin value not possible");
+    }
+    final result = copy().subtract(CoinStack.fromInt(value));
+    return result;
   }
+
+  static const random = CoinStack({
+    1: 5,
+    2: 3,
+    5: 2,
+    50: 1,
+    100: 1,
+  });
 
   // Remove coins from the stack
-  void removeInts(List<int> values) {
+  CoinStack removeInts(List<int> values) {
+    CoinStack coinStack = copy();
     for (var value in values) {
-      removeInt(value);
+      coinStack = coinStack.subtract(CoinStack.fromInt(value));
     }
-  }
-
-  void clear() {
-    _coins.clear();
+    return coinStack;
   }
 
   int countOfInts(int value) => _coins[value] ?? 0;
@@ -107,17 +120,15 @@ class CoinStack {
   */
   bool canGiveChange(int value) {
     int changeToGive = value;
-    List<int> coinsBigToSmall =
-        _coins.keys.toList()
-          ..sort((a, b) => b.compareTo(a)); // list of coins from big to small
+    List<int> coinsBigToSmall = _coins.keys.toList()
+      ..sort((a, b) => b.compareTo(a)); // list of coins from big to small
     for (var coinValue in coinsBigToSmall) {
       int availableCoins = _coins[coinValue] ?? 0; //available coins in stack
       int neededCoins =
           changeToGive ~/ coinValue; //coins we could use to give change
-      int coinsToUse =
-          neededCoins <= availableCoins
-              ? neededCoins
-              : availableCoins; // we take coins that are available for us
+      int coinsToUse = neededCoins <= availableCoins
+          ? neededCoins
+          : availableCoins; // we take coins that are available for us
       changeToGive -= coinsToUse * coinValue;
     }
     return changeToGive == 0;
@@ -146,8 +157,10 @@ class CoinStack {
     for (var entry in other._coins.entries) {
       int currentCount = result[entry.key] ?? 0;
       int newCount = currentCount - entry.value;
-      if (newCount <= 0) {
+      if (newCount == 0) {
         result.remove(entry.key);
+      } else if (newCount < 0) {
+        throw ArgumentError("Tried to subtract a coin which isnt there");
       } else {
         result[entry.key] = newCount;
       }

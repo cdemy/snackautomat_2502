@@ -10,19 +10,13 @@ class MoneyDisplayPriceWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Widget reagiert auf Zustandsänderungen
     final appState = ref.watch(appNotifierProvider);
-
-    // Berechne den Warenkorbpreis in Cents und €
-    final totalCartPriceInCents = appState.cartItems.fold(
-      0,
-      (sum, item) => sum + (item.snack.price * item.quantity),
-    );
-    final totalCartPriceInEuro = totalCartPriceInCents / 100.0;
+    final price = appState.selectedSnack?.price;
 
     String displayPriceText;
-    if (totalCartPriceInEuro > 0) {
-      displayPriceText = 'Gesamt: ${totalCartPriceInEuro.toStringAsFixed(2)} €';
+    if (price != null && price > 0) {
+      displayPriceText = 'Gesamt: ${(price / 100).toStringAsFixed(2)} €';
     } else {
-      displayPriceText = 'Warenkorb leer';
+      displayPriceText = 'leer';
     }
 
     return Container(

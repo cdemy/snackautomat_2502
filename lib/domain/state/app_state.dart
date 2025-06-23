@@ -1,70 +1,42 @@
 import 'package:flutter/foundation.dart';
+import 'package:snackautomat_2502/domain/snack.dart';
 import 'package:snackautomat_2502/models/cart_item.dart';
-
-@immutable // Klasse kann nicht verändert werden
-class Snack {
-  final String id;
-  final String name;
-  final int price;
-  final int quantity;
-
-  const Snack({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.quantity,
-  });
-
-  Snack copyWith({String? id, String? name, int? price, int? quantity}) {
-    return Snack(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      price: price ?? this.price,
-      quantity: quantity ?? this.quantity,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Snack &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          name == other.name &&
-          price == other.price &&
-          quantity == other.quantity;
-
-  @override
-  int get hashCode =>
-      id.hashCode ^ name.hashCode ^ price.hashCode ^ quantity.hashCode;
-
-  @override
-  String toString() {
-    return 'Snack{id: $id, name: $name, price: $price, quantity: $quantity}';
-  }
-}
+import 'package:snackautomat_2502/models/coinstack.dart';
 
 @immutable // Klasse kann nicht verändert werden
 class AppState {
   final List<Snack> availableSnacks;
-  final int currentCredit;
-  final List<CartItem> cartItems;
+  final CoinStack input;
+  final CoinStack machine;
+  final CoinStack output;
+  final Snack? selectedSnack;
 
   const AppState({
     this.availableSnacks = const [],
-    this.currentCredit = 0,
-    this.cartItems = const [],
+    this.input = const CoinStack(),
+    this.machine = const CoinStack(),
+    this.output = const CoinStack(),
+    this.selectedSnack,
   });
 
   AppState copyWith({
-    List<Snack>? availableSnacks,
-    int? currentCredit,
-    List<CartItem>? cartItems,
+    List<Snack> Function()? availableSnacks,
+    List<CartItem> Function()? cartItems,
+    CoinStack Function()? input,
+    CoinStack Function()? machine,
+    CoinStack Function()? output,
+    Snack? Function()? selectedSnack,
   }) {
     return AppState(
-      availableSnacks: availableSnacks ?? this.availableSnacks,
-      currentCredit: currentCredit ?? this.currentCredit,
-      cartItems: cartItems ?? this.cartItems,
+      availableSnacks: availableSnacks == null
+          ? this.availableSnacks
+          : availableSnacks(),
+      input: input == null ? this.input : input(),
+      machine: machine == null ? this.machine : machine(),
+      output: output == null ? this.output : output(),
+      selectedSnack: selectedSnack == null
+          ? this.selectedSnack
+          : selectedSnack(),
     );
   }
 
@@ -77,18 +49,19 @@ class AppState {
             availableSnacks,
             other.availableSnacks,
           ) &&
-          currentCredit == other.currentCredit &&
-          listEquals(
-            cartItems,
-            other.cartItems,
-          );
+          input == other.input &&
+          output == other.output &&
+          machine == other.machine;
 
   @override
   int get hashCode =>
-      availableSnacks.hashCode ^ currentCredit.hashCode ^ cartItems.hashCode;
+      availableSnacks.hashCode ^
+      input.hashCode ^
+      output.hashCode ^
+      machine.hashCode;
 
   @override
   String toString() {
-    return 'AppState{availableSnacks: $availableSnacks, currentCredit: $currentCredit, cartItems: $cartItems}';
+    return 'AppState{availableSnacks: $availableSnacks, input: $input, output: $output, machine: $machine}';
   }
 }
