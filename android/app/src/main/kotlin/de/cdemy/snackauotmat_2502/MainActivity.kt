@@ -1,4 +1,4 @@
-package de.cdemy.snackauotmat_2502
+package de.cdemy.snackautomat_2502
 
 import io.flutter.embedding.android.FlutterActivity
 

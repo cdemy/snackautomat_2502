@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "de.cdemy" "\0"
-            VALUE "FileDescription", "snackauotmat_2502" "\0"
+            VALUE "FileDescription", "snackautomat_2502" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "snackauotmat_2502" "\0"
+            VALUE "InternalName", "snackautomat_2502" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 de.cdemy. All rights reserved." "\0"
-            VALUE "OriginalFilename", "snackauotmat_2502.exe" "\0"
-            VALUE "ProductName", "snackauotmat_2502" "\0"
+            VALUE "OriginalFilename", "snackautomat_2502.exe" "\0"
+            VALUE "ProductName", "snackautomat_2502" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

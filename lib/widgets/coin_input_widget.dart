@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:snackauotmat_2502/state/app_notifier.dart';
+import 'package:snackautomat_2502/state/app_notifier.dart';
 
 class CoinInputWidget extends ConsumerWidget {
   const CoinInputWidget({super.key});
