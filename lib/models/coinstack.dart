@@ -1,13 +1,3 @@
-// Changed your normal comments to dart doc comments!
-// Cleaned up removeInt method to avoid unnecessary checks
-// Used final for all local variables that don't change
-// Improved isEqual method efficiency by checking length first
-// Made coins getter return an unmodifiable map to prevent external modification
-// Added explicit type <int>[] for list initialization
-// Added explicit type parameters for Map.from calls
-// Used explicit type <int, int>{} for map initialization
-// Used _coins.isNotEmpty instead of !isEmpty()
-
 /// Class CoinStack with static coin values
 class CoinStack {
   static const Set<int> potentialCoinValues = {1, 2, 5, 10, 20, 50, 100, 200};
@@ -15,10 +5,10 @@ class CoinStack {
 
   CoinStack(this._coins);
 
-  /// Returns access to coins (public map)
+  /// Return access to coins (public map)
   Map<int, int> get coins => Map.unmodifiable(_coins);
 
-  /// Returns list of coins
+  /// Return list of coins
   List<int> get asInts {
     final result = <int>[];
     for (final entry in _coins.entries) {
@@ -29,10 +19,10 @@ class CoinStack {
     return result;
   }
 
-  /// Returns the quantity of coins in stack
+  /// Return the quantity of coins in stack
   int get amountOfCoins => _coins.values.fold(0, (sum, count) => sum + count);
 
-  /// Returns the value of the stack
+  /// Return the value of the stack
   int get value {
     int totalSum = 0;
     for (final entry in _coins.entries) {
@@ -59,7 +49,7 @@ class CoinStack {
     if (!potentialCoinValues.contains(value)) return;
     if ((_coins[value] ?? 0) <= 0) return;
     //_coins[value]! is used instead of _coins[value] ?? 0 to ensure we don't add zero
-    // and then decrementing the count.
+    // and then decrementing the count
     _coins[value] = (_coins[value]! - 1);
     //Optional:
     if (_coins[value] == 0) {
@@ -74,42 +64,43 @@ class CoinStack {
     }
   }
 
-  //TODO: add doc
+  /// Clear the stack
   void clear() {
     _coins.clear();
   }
 
-  //TODO: add doc
+  /// Count the amount of all coins in the stack
   int countOfInts(int value) => _coins[value] ?? 0;
 
-  //TODO: add doc
+  /// Check if there is a particular coin in the stack
   bool containsInt(int value) {
     return _coins.containsKey(value) && _coins[value]! > 0;
   }
 
-  //TODO: add doc
+  /// Check if stack is empty
   bool isEmpty() => _coins.isEmpty;
 
-  //TODO: add doc
+  /// Check if stack is not empty
   bool isNotEmpty() => _coins.isNotEmpty;
 
-  /// To compare 2 stacks we use Set.from method
+  /// To compare 2 stacks we use stack length and every() method
   /// and check if keys (coin values) in both stacks are equal,
   /// then we compare values (quantity of each coin value) using the loop
   bool isEqual(CoinStack other) {
     if (_coins.length != other._coins.length) return false;
+    if (_coins.keys.every(other._coins.containsKey)) return false;
     for (final entry in _coins.entries) {
       if (other._coins[entry.key] != entry.value) return false;
     }
     return true;
   }
 
-  //TODO: add doc
+  /// Check if value of the first stack is equal to value of the second
   bool isEqualValue(CoinStack other) {
     return value == other.value;
   }
 
-  //TODO: add doc
+  /// Check if first stack contins the second inside
   bool contains(CoinStack other) {
     for (final entry in other._coins.entries) {
       if ((_coins[entry.key] ?? 0) < entry.value) return false;
@@ -125,6 +116,7 @@ class CoinStack {
   /// coins we need for a change (neededCoins), and coins we actually use in the end (coinsToUse).
   /// Then we substract the value of coins we used from the change variable.
   /// If we reached zero, function returns TRUE (we succeed) or returns FALSE if we didn't.
+
   bool canGiveChange(int value) {
     int changeToGive = value;
     final coinsBigToSmall = _coins.keys.toList()
@@ -135,10 +127,40 @@ class CoinStack {
           changeToGive ~/ coinValue; //coins we could use to give change
       final coinsToUse = neededCoins <= availableCoins
           ? neededCoins
-          : availableCoins; // we take coins that are available for us
+          : availableCoins; // we take coins that are available for us (needed or available)
       changeToGive -= coinsToUse * coinValue;
     }
     return changeToGive == 0;
+  }
+
+  /// To calculate the actual change, we first check if we are able to give it using the method canGiveChange.
+  /// If not — we return null (means: no change possible). Otherwise, we prepare an empty Map called result
+  /// where we will store the coins we actually give as change.
+  /// Then we create a list (coinsBigToSmall) with all coin values sorted from big to small (200, 100, 50, etc.).
+  /// We go through this list using a loop and calculate how many coins we have (availableCoins),
+  /// how many coins we need for the change (neededCoins), and how many we actually take (coinsToUse).
+  /// If we take any coins (more than 0), we add them to the result stack and reduce the change amount.
+  /// When the loop ends, we return a new CoinStack with the result Map — it contains all coins we give as change.
+
+  CoinStack? giveChange(int value) {
+    if (!canGiveChange(value)) return null;
+    final result = <int, int>{}; // here we keep change stack
+    int changeToGive = value;
+    final coinsBigToSmall = _coins.keys.toList()
+      ..sort((a, b) => b.compareTo(a));
+    for (final coinValue in coinsBigToSmall) {
+      final availableCoins = _coins[coinValue] ?? 0; //available coins in stack
+      final neededCoins =
+          changeToGive ~/ coinValue; //coins we could use to give change
+      final coinsToUse = neededCoins <= availableCoins
+          ? neededCoins
+          : availableCoins; // we take coins that are available for us (needed or available)
+      if (coinsToUse > 0) {
+        result[coinValue] = coinsToUse;
+        changeToGive -= coinsToUse * coinValue;
+      }
+    }
+    return CoinStack(result);
   }
 
   /// To merge 2 stacks we create a new map using method Map.from, then we start a loop
@@ -194,10 +216,30 @@ class CoinStack {
     return CoinStack(result);
   }
 
-  /// Returns string representation for debugging
+  /// Return string representation for debugging
   @override
   String toString() {
     if (_coins.isEmpty) return 'CoinStack: empty';
     return 'CoinStack: $_coins (total: $value)';
+  }
+
+  /// Transform data to JSON
+  Map<String, dynamic> toJson() {
+    final jsonMap = <String, dynamic>{};
+    for (final entry in _coins.entries) {
+      jsonMap[entry.key.toString()] = entry.value;
+    }
+    return jsonMap;
+  }
+
+  /// Transform data from JSON
+  factory CoinStack.fromJson(Map<String, dynamic> json) {
+    final coinMap = <int, int>{};
+    for (final entry in json.entries) {
+      final key = int.parse(entry.key);
+      final value = entry.value as int;
+      coinMap[key] = value;
+    }
+    return CoinStack(coinMap);
   }
 }
