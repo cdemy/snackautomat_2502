@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:snackautomat_2502/domain/snack.dart';
-import 'package:snackautomat_2502/models/cart_item.dart';
+import 'package:snackautomat_2502/models/snack.dart';
 import 'package:snackautomat_2502/models/coinstack.dart';
 
 @immutable // Klasse kann nicht verändert werden
@@ -21,7 +20,7 @@ class AppState {
 
   AppState copyWith({
     List<Snack> Function()? availableSnacks,
-    List<CartItem> Function()? cartItems,
+    List<Snack> Function()? cartItems,
     CoinStack Function()? input,
     CoinStack Function()? machine,
     CoinStack Function()? output,

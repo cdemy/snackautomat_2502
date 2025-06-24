@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/domain/state/app_notifier.dart';
-import 'package:snackautomat_2502/models/cart_item.dart';
 
 class ProductsViewWidget extends ConsumerWidget {
   const ProductsViewWidget({super.key});

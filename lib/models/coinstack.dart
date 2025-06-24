@@ -57,6 +57,7 @@ class CoinStack {
     return result;
   }
 
+  ///A Coinstack with a random number of Coins
   static const random = CoinStack({
     1: 5,
     2: 3,
