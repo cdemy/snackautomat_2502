@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/domain/snack.dart';
 import 'package:snackautomat_2502/domain/state/app_state.dart';
@@ -18,7 +19,7 @@ class AppNotifier extends Notifier<AppState> {
     ],
     input: CoinStack(),
     output: CoinStack(),
-    machine: CoinStack.random,
+    machine: CoinStack.firstCoins,
   );
 
   void addInput(int amount) {
@@ -27,7 +28,14 @@ class AppNotifier extends Notifier<AppState> {
     doTransaction();
   }
 
-  void doTransaction() {}
+  void doTransaction() {
+    if (state.selectedSnack != null) {
+      if (state.input.value >= state.selectedSnack!.price) {
+        //TODO: Buy?!
+        debugPrint("i can pay now!");
+      }
+    }
+  }
 
   void resetVendingMachine() {
     state = build();
