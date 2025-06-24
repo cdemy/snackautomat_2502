@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:snackautomat_2502/domain/state/app_state.dart';
+import 'package:snackautomat_2502/domain/snack.dart';
 
 @immutable
 class CartItem {

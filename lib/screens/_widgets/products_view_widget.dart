@@ -39,7 +39,7 @@ class ProductsViewWidget extends ConsumerWidget {
 
     final availableSnacks =
         appState.availableSnacks; //Liste der verfügbaren Produkte
-    final cartItems = appState.cartItems; // Produkte im Warenkorb
+    final selected = appState.selectedSnack;
 
     const double iconSize = 50.0;
     const double cardAspectRatio = 0.75;
@@ -70,32 +70,16 @@ class ProductsViewWidget extends ConsumerWidget {
               itemCount: availableSnacks.length,
               itemBuilder: (context, index) {
                 final snack = availableSnacks[index]; // Das aktuelle Produkt
-
-                CartItem? currentCartItem;
-                try {
-                  currentCartItem = cartItems.firstWhere(
-                    (item) => item.snack.id == snack.id,
-                  );
-                } catch (e) {
-                  currentCartItem = null;
-                }
-
-                final int quantityInCart =
-                    currentCartItem?.quantity ??
-                    0; // Menge des Produkts im Warenkorb
-                final bool isInCart =
-                    quantityInCart > 0; // Wahr, wenn der Snack im Warenkorb ist
                 final bool isSoldOut =
                     snack.quantity == 0; // Wahr, wenn der Snack ausverkauft ist
-
                 return GestureDetector(
-                  onTap: isSoldOut || quantityInCart >= snack.quantity
-                      ? null // Wenn null, gibt es keine visuelle Reaktion auf Tap
-                      : () => appNotifier.incrementSnackInCart(snack.id),
+                  onTap: () {
+                    appNotifier.chooseSnack(snack);
+                  },
                   child: Card(
-                    elevation: isInCart ? 8 : 2,
+                    elevation: snack == selected ? 8 : 2,
                     color: isSoldOut ? Colors.grey[300] : Colors.white,
-                    shape: isInCart
+                    shape: snack == selected
                         ? RoundedRectangleBorder(
                             side: BorderSide(
                               color: Theme.of(context).primaryColor,
@@ -159,48 +143,6 @@ class ProductsViewWidget extends ConsumerWidget {
                                   ? Colors.red[700]
                                   : Colors.black54,
                             ),
-                          ),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.arrow_downward,
-                                ), // Pfeil nach unten.
-                                // Button deaktiviert, wenn Snack ausverkauft
-                                onPressed: isSoldOut || quantityInCart == 0
-                                    ? null
-                                    : () => appNotifier.decrementSnackInCart(
-                                        snack.id,
-                                      ),
-                                iconSize: 20,
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
-                              ),
-                              Text(
-                                '$quantityInCart',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.arrow_upward,
-                                ), // Pfeil nach oben
-                                onPressed:
-                                    isSoldOut ||
-                                        quantityInCart >= snack.quantity
-                                    ? null
-                                    : () => appNotifier.incrementSnackInCart(
-                                        snack.id,
-                                      ),
-                                iconSize: 20,
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
-                              ),
-                            ],
                           ),
                         ],
                       ),

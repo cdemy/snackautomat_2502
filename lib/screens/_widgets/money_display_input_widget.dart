@@ -9,7 +9,7 @@ class MoneyDisplayInputWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appState = ref.watch(appNotifierProvider);
 
-    final currentCreditInCents = appState.currentCredit;
+    final currentCreditInCents = appState.input.value;
     final currentCreditInEuro = currentCreditInCents / 100.0;
     final displayText =
         'Guthaben: ${currentCreditInEuro.toStringAsFixed(2)} €'; // Formatierter Anzeigetext

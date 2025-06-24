@@ -12,11 +12,8 @@ class MoneyDisplayOutputWidget extends ConsumerWidget {
 
     final appNotifier = ref.read(appNotifierProvider.notifier);
 
-    final currentCreditInCents = appState.currentCredit;
+    final currentCreditInCents = appState.input.value;
     final currentCreditInEuro = currentCreditInCents / 100.0;
-
-    final totalCartPriceInCents = appNotifier.cartTotalPrice;
-
     String displayText;
     if (currentCreditInEuro > 0) {
       displayText =
@@ -46,26 +43,6 @@ class MoneyDisplayOutputWidget extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // "Kaufen"-Button
-                ElevatedButton(
-                  // Button ist  aktiv, wenn der Warenkorb nicht leer ist und Geld eingeworfen wurde
-                  onPressed:
-                      appState.cartItems.isNotEmpty &&
-                          currentCreditInCents >= totalCartPriceInCents
-                      ? () {
-                          appNotifier.purchaseCart();
-                        }
-                      : null, // Deaktiviert den Button, wenn die Bedingungen nicht erfüllt sind
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[700],
-                    foregroundColor: Colors.white,
-                  ),
-                  child: const Text(
-                    'Kaufen',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                ),
-
                 // "Geld entnehmen"-Button
                 ElevatedButton(
                   // Button ist nur aktiv, wenn das aktuelle Guthaben drauf ist
