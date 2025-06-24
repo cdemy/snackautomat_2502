@@ -26,6 +26,8 @@ class AppState {
     CoinStack Function()? output,
     Snack? Function()? selectedSnack,
   }) {
+    // debugPrint("AppState.copyWith called");
+
     return AppState(
       availableSnacks: availableSnacks == null
           ? this.availableSnacks

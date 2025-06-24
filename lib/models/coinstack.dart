@@ -1,4 +1,6 @@
 // Class CoinStack with static coin values
+import 'package:flutter/foundation.dart';
+
 class CoinStack {
   static const Set<int> potentialCoinValues = {1, 2, 5, 10, 20, 50, 100, 200};
   final Map<int, int> _coins;

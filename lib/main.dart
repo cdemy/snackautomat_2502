@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'screens/main_screen.dart';
 
 void main() {
+  debugPrint("Hello");
   runApp(
     const ProviderScope(
       child: MyApp(),
