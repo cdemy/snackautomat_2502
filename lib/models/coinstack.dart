@@ -1,8 +1,4 @@
-import 'dart:math';
-
 /// Class CoinStack with static coin values
-import 'package:flutter/foundation.dart';
-
 class CoinStack {
   static const Set<int> potentialCoinValues = {10, 20, 50, 100, 200};
   final Map<int, int> _coins;
@@ -13,7 +9,7 @@ class CoinStack {
   /// Named constructor to create a stack with a single coin of the given value
   CoinStack.fromInt(int value)
     : _coins = {value: 1},
-      assert(potentialCoinValues.contains(value), "CoinStack not valid");
+      assert(potentialCoinValues.contains(value), 'CoinStack not valid');
 
   /// Return access to coins (public map)
   Map<int, int> get coins => Map.unmodifiable(_coins);
@@ -41,27 +37,13 @@ class CoinStack {
     return totalSum;
   }
 
-  //TODO: Use a factory to implement random values
-  /// Return a stack with random number of coins (20 to 50) of each value
-  static CoinStack get random {
-    final rand = Random();
-    final coins = <int, int>{};
-    for (var value in potentialCoinValues) {
-      coins[value] = 20 + rand.nextInt(31);
-    }
-    return CoinStack(coins);
-  }
-
-  /// Gives a starting Stack of coins with 3 of each
-  static const CoinStack firstCoins = CoinStack({
-    1: 3,
-    2: 3,
-    5: 3,
-    10: 3,
-    20: 3,
-    50: 3,
-    100: 3,
-    200: 3,
+  /// Return a starting Stack of coins with 3 of each
+  static const CoinStack startCoins = CoinStack({
+    10: 50,
+    20: 50,
+    50: 50,
+    100: 50,
+    200: 50,
   });
 
   /// Return a copy of the current stack

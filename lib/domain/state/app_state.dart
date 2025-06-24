@@ -8,6 +8,7 @@ class AppState {
   final CoinStack input;
   final CoinStack machine;
   final CoinStack output;
+  final CoinStack wallet;
   final Snack? selectedSnack;
 
   const AppState({
@@ -15,6 +16,7 @@ class AppState {
     this.input = const CoinStack(),
     this.machine = const CoinStack(),
     this.output = const CoinStack(),
+    this.wallet = const CoinStack(),
     this.selectedSnack,
   });
 
@@ -24,6 +26,7 @@ class AppState {
     CoinStack Function()? input,
     CoinStack Function()? machine,
     CoinStack Function()? output,
+    CoinStack Function()? wallet,
     Snack? Function()? selectedSnack,
   }) {
     // debugPrint("AppState.copyWith called");
@@ -35,6 +38,7 @@ class AppState {
       input: input == null ? this.input : input(),
       machine: machine == null ? this.machine : machine(),
       output: output == null ? this.output : output(),
+      wallet: wallet == null ? this.wallet : wallet(),
       selectedSnack: selectedSnack == null
           ? this.selectedSnack
           : selectedSnack(),

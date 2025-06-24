@@ -19,7 +19,7 @@ class AppNotifier extends Notifier<AppState> {
     ],
     input: CoinStack(),
     output: CoinStack(),
-    machine: CoinStack.firstCoins,
+    machine: CoinStack.startCoins,
   );
 
   void addInput(int amount) {
@@ -31,8 +31,7 @@ class AppNotifier extends Notifier<AppState> {
   void doTransaction() {
     if (state.selectedSnack != null) {
       if (state.input.value >= state.selectedSnack!.price) {
-        //TODO: Buy?!
-        debugPrint("i can pay now!");
+        //TODO: finish the fucntion
       }
     }
   }
