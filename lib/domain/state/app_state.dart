@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:snackautomat_2502/domain/snack.dart';
-import 'package:snackautomat_2502/models/cart_item.dart';
+import 'package:snackautomat_2502/models/snack.dart';
 import 'package:snackautomat_2502/models/coinstack.dart';
 
 @immutable // Klasse kann nicht verändert werden
@@ -9,6 +8,7 @@ class AppState {
   final CoinStack input;
   final CoinStack machine;
   final CoinStack output;
+  final CoinStack wallet;
   final Snack? selectedSnack;
 
   const AppState({
@@ -16,17 +16,21 @@ class AppState {
     this.input = const CoinStack(),
     this.machine = const CoinStack(),
     this.output = const CoinStack(),
+    this.wallet = const CoinStack(),
     this.selectedSnack,
   });
 
   AppState copyWith({
     List<Snack> Function()? availableSnacks,
-    List<CartItem> Function()? cartItems,
+    List<Snack> Function()? cartItems,
     CoinStack Function()? input,
     CoinStack Function()? machine,
     CoinStack Function()? output,
+    CoinStack Function()? wallet,
     Snack? Function()? selectedSnack,
   }) {
+    // debugPrint("AppState.copyWith called");
+
     return AppState(
       availableSnacks: availableSnacks == null
           ? this.availableSnacks
@@ -34,6 +38,7 @@ class AppState {
       input: input == null ? this.input : input(),
       machine: machine == null ? this.machine : machine(),
       output: output == null ? this.output : output(),
+      wallet: wallet == null ? this.wallet : wallet(),
       selectedSnack: selectedSnack == null
           ? this.selectedSnack
           : selectedSnack(),
