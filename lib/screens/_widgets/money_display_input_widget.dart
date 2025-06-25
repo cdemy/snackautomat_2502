@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/domain/state/app_notifier.dart';
+import 'package:snackautomat_2502/theme/theme_extentions.dart';
 
 class MoneyDisplayInputWidget extends ConsumerWidget {
   const MoneyDisplayInputWidget({super.key});
@@ -15,7 +16,7 @@ class MoneyDisplayInputWidget extends ConsumerWidget {
         'Guthaben: ${currentCreditInEuro.toStringAsFixed(2)} €'; // Formatierter Anzeigetext
 
     return Container(
-      color: Colors.green[200],
+      color: context.appColors.moneyDisplayInputBackground,
       child: Center(
         child: Text(
           displayText, // Zeigt das aktuelle Guthaben an

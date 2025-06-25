@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:snackautomat_2502/theme/vending_theme.dart';
 import 'screens/main_screen.dart';
 
 void main() {
@@ -17,9 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Vending Machine App',
-      theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
-      ),
+      theme: lightVendingMachineTheme,
       home: MainScreen(),
     );
   }

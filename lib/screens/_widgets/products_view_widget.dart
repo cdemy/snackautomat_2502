@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/domain/state/app_notifier.dart';
-import 'package:snackautomat_2502/models/cart_item.dart';
+// import 'package:snackautomat_2502/models/cart_item.dart';
+import 'package:snackautomat_2502/theme/theme_extentions.dart';
 
 class ProductsViewWidget extends ConsumerWidget {
   const ProductsViewWidget({super.key});
@@ -36,7 +37,6 @@ class ProductsViewWidget extends ConsumerWidget {
     // Bei änderung wird ein Rebuild ausgelöst
     final appState = ref.watch(appNotifierProvider);
     final appNotifier = ref.read(appNotifierProvider.notifier);
-
     final availableSnacks =
         appState.availableSnacks; //Liste der verfügbaren Produkte
     final selected = appState.selectedSnack;
@@ -46,7 +46,7 @@ class ProductsViewWidget extends ConsumerWidget {
     const int crossAxisCount = 3;
 
     return Container(
-      color: Colors.blue[100], // Hintergrundfarbe des Produktbereichs
+      color: context.appColors.productsViewBackground,
       padding: const EdgeInsets.all(8.0),
       child: availableSnacks.isEmpty
           ? const Center(
@@ -78,11 +78,13 @@ class ProductsViewWidget extends ConsumerWidget {
                   },
                   child: Card(
                     elevation: snack == selected ? 8 : 2,
-                    color: isSoldOut ? Colors.grey[300] : Colors.white,
+                    color: isSoldOut
+                        ? Colors.grey[300]
+                        : context.appColors.productViewIconBackground,
                     shape: snack == selected
                         ? RoundedRectangleBorder(
                             side: BorderSide(
-                              color: Theme.of(context).primaryColor,
+                              color: Color(0xFF00E676),
                               width: 3,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
