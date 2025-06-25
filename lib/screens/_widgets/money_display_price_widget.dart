@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/domain/state/app_notifier.dart';
-// import 'package:snackauotmat_2502/state/app_state.dart';
+import 'package:snackautomat_2502/theme/theme_extentions.dart';
 
 class MoneyDisplayPriceWidget extends ConsumerWidget {
   const MoneyDisplayPriceWidget({super.key});
@@ -20,7 +20,8 @@ class MoneyDisplayPriceWidget extends ConsumerWidget {
     }
 
     return Container(
-      color: Colors.orange[200],
+      // color: Colors.orange[200],
+      color: context.appColors.moneyDisplayPriceBackground,
       child: Center(
         child: Text(
           displayPriceText,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/domain/state/app_notifier.dart';
 import 'package:snackautomat_2502/models/coinstack.dart';
+import 'package:snackautomat_2502/theme/theme_extentions.dart';
 
 class CoinInputWidget extends ConsumerWidget {
   const CoinInputWidget({super.key});
@@ -9,7 +10,7 @@ class CoinInputWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      color: Colors.purple[200],
+      color: context.appColors.coinInputWidgetBackground,
       padding: const EdgeInsets.all(8.0),
       child: Center(
         child: Wrap(

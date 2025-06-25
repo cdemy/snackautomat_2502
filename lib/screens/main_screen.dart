@@ -4,6 +4,7 @@ import 'package:snackautomat_2502/screens/_widgets/money_display_input_widget.da
 import 'package:snackautomat_2502/screens/_widgets/money_display_price_widget.dart';
 import 'package:snackautomat_2502/screens/_widgets/coin_input_widget.dart';
 import 'package:snackautomat_2502/screens/_widgets/money_display_output_widget.dart';
+import 'package:snackautomat_2502/theme/theme_extentions.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -11,11 +12,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Vending Machine',
-        ),
-      ),
+      backgroundColor: context.appColors.background,
       body: Padding(
         padding: const EdgeInsets.all(
           16.0,
