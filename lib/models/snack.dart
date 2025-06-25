@@ -12,7 +12,7 @@ class Snack {
     required this.name,
     required this.price,
     required this.quantity,
-  }); 
+  });
 
   Snack copyWith({String? id, String? name, int? price, int? quantity}) {
     return Snack(

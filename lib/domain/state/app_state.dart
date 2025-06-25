@@ -20,6 +20,8 @@ class AppState {
     this.selectedSnack,
   });
 
+  
+
   AppState copyWith({
     List<Snack> Function()? availableSnacks,
     List<Snack> Function()? cartItems,
