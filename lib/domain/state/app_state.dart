@@ -69,7 +69,6 @@ class AppState {
   String toString() {
     return 'AppState{availableSnacks: $availableSnacks, input: $input, output: $output, machine: $machine}';
   }
-}
 
   //.toJson() and .fromJson()
   Map<String, dynamic> toJson() => {
@@ -93,3 +92,4 @@ class AppState {
         ? Snack.fromJson(json['selectedSnack'] as Map<String, dynamic>)
         : null,
   );
+}
