@@ -8,7 +8,7 @@ class AppState {
   final CoinStack input;
   final CoinStack machine;
   final CoinStack output;
-  final CoinStack wallet;
+  final String? displayMessage;
   final Snack? selectedSnack;
 
   const AppState({
@@ -16,11 +16,9 @@ class AppState {
     this.input = const CoinStack(),
     this.machine = const CoinStack(),
     this.output = const CoinStack(),
-    this.wallet = const CoinStack(),
+    this.displayMessage,
     this.selectedSnack,
   });
-
-  
 
   AppState copyWith({
     List<Snack> Function()? availableSnacks,
@@ -28,7 +26,7 @@ class AppState {
     CoinStack Function()? input,
     CoinStack Function()? machine,
     CoinStack Function()? output,
-    CoinStack Function()? wallet,
+    String? Function()? displayMessage,
     Snack? Function()? selectedSnack,
   }) {
     // debugPrint("AppState.copyWith called");
@@ -40,7 +38,9 @@ class AppState {
       input: input == null ? this.input : input(),
       machine: machine == null ? this.machine : machine(),
       output: output == null ? this.output : output(),
-      wallet: wallet == null ? this.wallet : wallet(),
+      displayMessage: displayMessage == null
+          ? this.displayMessage
+          : displayMessage(),
       selectedSnack: selectedSnack == null
           ? this.selectedSnack
           : selectedSnack(),
@@ -58,17 +58,21 @@ class AppState {
           ) &&
           input == other.input &&
           output == other.output &&
-          machine == other.machine;
+          machine == other.machine &&
+          selectedSnack == other.selectedSnack &&
+          displayMessage == other.displayMessage;
 
   @override
   int get hashCode =>
       availableSnacks.hashCode ^
       input.hashCode ^
       output.hashCode ^
-      machine.hashCode;
+      machine.hashCode ^
+      selectedSnack.hashCode ^
+      displayMessage.hashCode;
 
   @override
   String toString() {
-    return 'AppState{availableSnacks: $availableSnacks, input: $input, output: $output, machine: $machine}';
+    return 'AppState{availableSnacks: $availableSnacks, input: $input, output: $output, machine: $machine, selectedSnack: $selectedSnack, displayMessage: $displayMessage}';
   }
 }

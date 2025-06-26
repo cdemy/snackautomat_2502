@@ -12,12 +12,13 @@ class MoneyDisplayOutputWidget extends ConsumerWidget {
 
     final appNotifier = ref.read(appNotifierProvider.notifier);
 
-    final currentCreditInCents = appState.input.value;
-    final currentCreditInEuro = currentCreditInCents / 100.0;
+    final totalUsersBalanceInCents =
+        appState.input.value + appState.output.value;
+    final totalUsersBalanceInEuro = totalUsersBalanceInCents / 100.0;
     String displayText;
-    if (currentCreditInEuro > 0) {
+    if (totalUsersBalanceInEuro > 0) {
       displayText =
-          'Rückgeld: ${currentCreditInEuro.toStringAsFixed(2)} €'; // Anzeige des Rückgeldes
+          'Rückgeld: ${totalUsersBalanceInEuro.toStringAsFixed(2)} €'; // Anzeige des Rückgeldes
     } else {
       displayText =
           'Rückgabe / Rückgeld'; // Text wenn kein Geld eingeworfen wurde
@@ -46,7 +47,7 @@ class MoneyDisplayOutputWidget extends ConsumerWidget {
                 // "Geld entnehmen"-Button
                 ElevatedButton(
                   // Button ist nur aktiv, wenn das aktuelle Guthaben drauf ist
-                  onPressed: currentCreditInEuro > 0
+                  onPressed: totalUsersBalanceInEuro > 0
                       ? () {
                           appNotifier.returnCredit();
                         }
