@@ -3,11 +3,36 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/domain/state/app_notifier.dart';
 import 'package:snackautomat_2502/theme/theme_extentions.dart';
 
-
-
 class ProductsViewWidget extends ConsumerWidget {
   const ProductsViewWidget({super.key});
 
+  /// Method to get the path to the product image
+  String _getSnackImagePath(String snackName) {
+    switch (snackName.toLowerCase()) {
+      case 'haribo':
+        return 'assets/images/products/haribo_schluempfe';
+      case 'knoppers':
+        return 'assets/images/products/knoppers';
+      case 'lorenz_erdnuss':
+        return 'assets/images/products/lorenz_erdnuss';
+      case 'milka':
+        return 'assets/images/products/milka';
+      case 'paprika_chips':
+        return 'assets/images/products/paprika_chips';
+      case 'paulaner_spezi':
+        return 'assets/images/products/paulaner_spezi';
+      case 'potato_chips':
+        return 'assets/images/products/potato_chips';
+      case 'sour_cream_onion_chips':
+        return 'assets/images/products/sour_cream_onion_chips';
+      case 'tuc_cracker':
+        return 'assets/images/products/tuc_cracker';
+      default:
+        return 'assets/images/products/default_snack';
+    }
+  }
+
+  /// Fallback icons in case the image fails to load
   IconData _getSnackIcon(String snackName) {
     switch (snackName.toLowerCase()) {
       case 'kuchen':
