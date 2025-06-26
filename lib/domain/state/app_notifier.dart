@@ -1,47 +1,65 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/models/snack.dart';
-import 'package:snackautomat_2502/domain/state/app_state.dart';
 import 'package:snackautomat_2502/models/coinstack.dart';
+import 'package:snackautomat_2502/domain/state/app_state.dart';
+import 'package:snackautomat_2502/services/persistence.dart'; // hinzufügen
 
 class AppNotifier extends Notifier<AppState> {
-  AppState build() => const AppState(
-    availableSnacks: [
-      Snack(id: '1', name: 'Kuchen', price: 250, quantity: 8),
-      Snack(id: '2', name: 'Chips', price: 120, quantity: 5),
-      Snack(id: '3', name: 'Cola', price: 200, quantity: 8),
-      Snack(id: '4', name: 'Wasser', price: 100, quantity: 12),
-      Snack(id: '5', name: 'Gummibärchen', price: 180, quantity: 7),
-      Snack(id: '6', name: 'Apfelsaft', price: 170, quantity: 9),
-      Snack(id: '7', name: 'Sandwich', price: 350, quantity: 4),
-      Snack(id: '8', name: 'Müsliriegel', price: 130, quantity: 15),
-      Snack(id: '9', name: 'Eistee', price: 220, quantity: 6),
-    ],
-    input: CoinStack(),
-    output: CoinStack(),
-    machine: CoinStack.startCoins,
-  );
+  @override
+  AppState build() {
+    _loadInitialState();
+    return const AppState(
+      availableSnacks: [
+        Snack(id: '1', name: 'Kuchen', price: 250, quantity: 8),
+        Snack(id: '2', name: 'Chips', price: 120, quantity: 5),
+        Snack(id: '3', name: 'Cola', price: 200, quantity: 8),
+        Snack(id: '4', name: 'Wasser', price: 100, quantity: 12),
+        Snack(id: '5', name: 'Gummibärchen', price: 180, quantity: 7),
+        Snack(id: '6', name: 'Apfelsaft', price: 170, quantity: 9),
+        Snack(id: '7', name: 'Sandwich', price: 350, quantity: 4),
+        Snack(id: '8', name: 'Müsliriegel', price: 130, quantity: 15),
+        Snack(id: '9', name: 'Eistee', price: 220, quantity: 6),
+      ],
+      input: CoinStack(),
+      output: CoinStack(),
+      machine: CoinStack.startCoins,
+    );
+  }
+
+  Future<void> _loadInitialState() async {
+    final loaded = await loadAppState();
+    if (loaded != null) {
+      state = loaded;
+    }
+  }
+
+  Future<void> _persistState() async {
+    await saveAppState(state);
+  }
 
   void addInput(int amount) {
     final newInput = state.input.addInt(amount);
     state = state.copyWith(input: () => newInput);
+    _persistState();
     doTransaction();
   }
 
   void doTransaction() {
-    if (state.selectedSnack != null) {
-      if (state.input.value >= state.selectedSnack!.price) {
-        //TODO: finish the fucntion
-      }
+    if (state.selectedSnack != null &&
+        state.input.value >= state.selectedSnack!.price) {
+      // TODO: finish the function
+      _persistState();
     }
   }
 
   void resetVendingMachine() {
     state = build();
+    _persistState();
   }
 
   void returnCredit() {
     state = state.copyWith(input: () => CoinStack());
+    _persistState();
   }
 
   void chooseSnack(Snack snack) {
@@ -50,6 +68,7 @@ class AppNotifier extends Notifier<AppState> {
     } else {
       state = state.copyWith(selectedSnack: () => null);
     }
+    _persistState();
     doTransaction();
   }
 }

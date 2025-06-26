@@ -12,7 +12,7 @@ class Snack {
     required this.name,
     required this.price,
     required this.quantity,
-  }); 
+  });
 
   Snack copyWith({String? id, String? name, int? price, int? quantity}) {
     return Snack(
@@ -41,4 +41,19 @@ class Snack {
   String toString() {
     return 'Snack{id: $id, name: $name, price: $price, quantity: $quantity}';
   }
+
+  //serializing
+  factory Snack.fromJson(Map<String, dynamic> json) => Snack(
+    id: json['id'] as String,
+    name: json['name'] as String,
+    price: json['price'] as int,
+    quantity: json['quantity'] as int,
+  );
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'price': price,
+    'quantity': quantity,
+  };
 }
