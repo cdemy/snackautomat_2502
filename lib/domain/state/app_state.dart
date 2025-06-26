@@ -70,3 +70,26 @@ class AppState {
     return 'AppState{availableSnacks: $availableSnacks, input: $input, output: $output, machine: $machine}';
   }
 }
+
+  //.toJson() and .fromJson()
+  Map<String, dynamic> toJson() => {
+    'availableSnacks': availableSnacks.map((s) => s.toJson()).toList(),
+    'input': input.toJson(),
+    'output': output.toJson(),
+    'machine': machine.toJson(),
+    'wallet': wallet.toJson(),
+    'selectedSnack': selectedSnack?.toJson(),
+  };
+
+  factory AppState.fromJson(Map<String, dynamic> json) => AppState(
+    availableSnacks: (json['availableSnacks'] as List)
+        .map((e) => Snack.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    input: CoinStack.fromJson(json['input'] as Map<String, dynamic>),
+    output: CoinStack.fromJson(json['output'] as Map<String, dynamic>),
+    machine: CoinStack.fromJson(json['machine'] as Map<String, dynamic>),
+    wallet: CoinStack.fromJson(json['wallet'] as Map<String, dynamic>),
+    selectedSnack: json['selectedSnack'] != null
+        ? Snack.fromJson(json['selectedSnack'] as Map<String, dynamic>)
+        : null,
+  );
