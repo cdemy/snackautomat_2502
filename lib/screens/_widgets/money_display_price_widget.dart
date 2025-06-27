@@ -11,12 +11,13 @@ class MoneyDisplayPriceWidget extends ConsumerWidget {
     // Widget reagiert auf Zustandsänderungen
     final appState = ref.watch(appNotifierProvider);
     final price = appState.selectedSnack?.price;
+    final name = appState.selectedSnack?.name;
 
     String displayPriceText;
     if (price != null && price > 0) {
-      displayPriceText = 'Gesamt: ${(price / 100).toStringAsFixed(2)} €';
+      displayPriceText = '$name: ${(price / 100).toStringAsFixed(2)} €';
     } else {
-      displayPriceText = 'leer';
+      displayPriceText = "Select Snack";
     }
 
     return Container(
@@ -24,7 +25,7 @@ class MoneyDisplayPriceWidget extends ConsumerWidget {
       color: context.appColors.moneyDisplayPriceBackground,
       child: Center(
         child: Text(
-          displayPriceText,
+          appState.displayMessage ?? displayPriceText,
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,

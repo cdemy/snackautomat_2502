@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/domain/state/app_notifier.dart';
 import 'package:snackautomat_2502/theme/theme_extentions.dart';
 
-
-
 class ProductsViewWidget extends ConsumerWidget {
   const ProductsViewWidget({super.key});
 
@@ -75,7 +73,7 @@ class ProductsViewWidget extends ConsumerWidget {
                     snack.quantity == 0; // Wahr, wenn der Snack ausverkauft ist
                 return GestureDetector(
                   onTap: () {
-                    appNotifier.chooseSnack(snack);
+                    appNotifier.selectSnack(snack);
                   },
                   child: Card(
                     elevation: snack == selected ? 8 : 2,
