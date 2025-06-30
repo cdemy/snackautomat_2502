@@ -6,28 +6,31 @@ import 'package:snackautomat_2502/theme/theme_extentions.dart';
 class ProductsViewWidget extends ConsumerWidget {
   const ProductsViewWidget({super.key});
 
-  IconData _getSnackIcon(String snackName) {
-    switch (snackName.toLowerCase()) {
-      case 'kuchen':
-        return Icons.cake_outlined;
-      case 'chips':
-        return Icons.local_mall;
-      case 'cola':
-        return Icons.local_drink;
-      case 'wasser':
-        return Icons.water_drop;
-      case 'gummibärchen':
-        return Icons.toys_outlined;
-      case 'apfelsaft':
-        return Icons.coffee;
-      case 'sandwich':
-        return Icons.lunch_dining;
-      case 'müsliriegel':
-        return Icons.energy_savings_leaf;
-      case 'eistee':
-        return Icons.icecream;
+  /// Method to get the path to the product image
+  String _getSnackImagePath(String snackId) {
+    switch (snackId) {
+      case '1':
+        return 'assets/images/products/haribo_schluempfe.png';
+      case '2':
+        return 'assets/images/products/knoppers.png';
+      case '3':
+        return 'assets/images/products/lorenz_erdnuss.png';
+      case '4':
+        return 'assets/images/products/milka.png';
+      case '5':
+        return 'assets/images/products/paprika_chips.png';
+      case '6':
+        return 'assets/images/products/paulaner_spezi.png';
+      case '7':
+        return 'assets/images/products/potato_chips.png';
+      case '8':
+        return 'assets/images/products/sour_cream_onion_chips.png';
+      case '9':
+        return 'assets/images/products/tuc_cracker.png';
+
+      /// Fallback image in case something is wrong
       default:
-        return Icons.fastfood;
+        return 'assets/images/products/default_snack.png';
     }
   }
 
@@ -40,7 +43,6 @@ class ProductsViewWidget extends ConsumerWidget {
         appState.availableSnacks; //Liste der verfügbaren Produkte
     final selected = appState.selectedSnack;
 
-    const double iconSize = 50.0;
     const double cardAspectRatio = 0.75;
     const int crossAxisCount = 3;
 
@@ -100,14 +102,14 @@ class ProductsViewWidget extends ConsumerWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Icon(
-                            _getSnackIcon(
-                              snack.name,
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: 10,
+                              maxHeight: 350,
                             ),
-                            size: iconSize,
-                            color: isSoldOut
-                                ? Colors.black26
-                                : Theme.of(context).primaryColor,
+                            child: Image.asset(
+                              _getSnackImagePath(snack.id),
+                            ),
                           ),
                           Text(
                             snack.name,
