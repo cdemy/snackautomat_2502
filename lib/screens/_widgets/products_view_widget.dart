@@ -10,25 +10,25 @@ class ProductsViewWidget extends ConsumerWidget {
   String _getSnackImagePath(String snackName) {
     switch (snackName.toLowerCase()) {
       case 'haribo':
-        return 'assets/images/products/haribo_schluempfe';
+        return 'assets/images/products/haribo_schluempfe.png';
       case 'knoppers':
-        return 'assets/images/products/knoppers';
+        return 'assets/images/products/knoppers.png';
       case 'lorenz_erdnuss':
-        return 'assets/images/products/lorenz_erdnuss';
+        return 'assets/images/products/lorenz_erdnuss.png';
       case 'milka':
-        return 'assets/images/products/milka';
+        return 'assets/images/products/milka.png';
       case 'paprika_chips':
-        return 'assets/images/products/paprika_chips';
+        return 'assets/images/products/paprika_chips.png';
       case 'paulaner_spezi':
-        return 'assets/images/products/paulaner_spezi';
+        return 'assets/images/products/paulaner_spezi.png';
       case 'potato_chips':
-        return 'assets/images/products/potato_chips';
+        return 'assets/images/products/potato_chips.png';
       case 'sour_cream_onion_chips':
-        return 'assets/images/products/sour_cream_onion_chips';
+        return 'assets/images/products/sour_cream_onion_chips.png';
       case 'tuc_cracker':
-        return 'assets/images/products/tuc_cracker';
+        return 'assets/images/products/tuc_cracker.png';
       default:
-        return 'assets/images/products/default_snack';
+        return 'assets/images/products/default_snack.png';
     }
   }
 
@@ -127,15 +127,17 @@ class ProductsViewWidget extends ConsumerWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Icon(
-                            _getSnackIcon(
-                              snack.name,
-                            ),
-                            size: iconSize,
-                            color: isSoldOut
-                                ? Colors.black26
-                                : Theme.of(context).primaryColor,
-                          ),
+                          // Image.asset(_getSnackImagePath('milka')),
+                          Image.asset(_getSnackImagePath(snack.name)),
+                          // Icon(
+                          //   _getSnackIcon(
+                          //     snack.name,
+                          //   ),
+                          //   size: iconSize,
+                          //   color: isSoldOut
+                          //       ? Colors.black26
+                          //       : Theme.of(context).primaryColor,
+                          // ),
                           Text(
                             snack.name,
                             style: TextStyle(
