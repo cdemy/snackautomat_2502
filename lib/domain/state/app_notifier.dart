@@ -10,6 +10,7 @@ class AppNotifier extends Notifier<AppState> {
     _loadInitialState();
     return const AppState(
       availableSnacks: [
+        //<<<<<<< HEAD
         Snack(id: '1', name: 'Haribo Schlümpfe', price: 220, quantity: 8),
         Snack(id: '2', name: 'Knoppers', price: 150, quantity: 5),
         Snack(id: '3', name: 'Paulaner Spezi', price: 250, quantity: 8),
@@ -19,6 +20,22 @@ class AppNotifier extends Notifier<AppState> {
         Snack(id: '7', name: 'TUC Cracker', price: 160, quantity: 4),
         Snack(id: '8', name: 'Pringles', price: 250, quantity: 15),
         Snack(id: '9', name: 'Milka Oreo', price: 180, quantity: 6),
+        //=======
+        // Snack(id: '1', name: 'Haribo', price: 250, quantity: 8),
+        //Snack(id: '2', name: 'Knoppers', price: 120, quantity: 5),
+        //Snack(id: '3', name: 'Erdnuss', price: 200, quantity: 8),
+        //Snack(id: '4', name: 'Milka', price: 100, quantity: 12),
+        //Snack(id: '5', name: 'Paprika chips', price: 180, quantity: 7),
+        //Snack(id: '6', name: 'Paulaner spezi', price: 170, quantity: 9),
+        //Snack(id: '7', name: 'Potato chips', price: 350, quantity: 4),
+        //Snack(
+        // id: '8',
+        // name: 'Sour cream onion chips',
+        // price: 130,
+        //quantity: 15,
+        //),
+        //Snack(id: '9', name: 'Tuc cracker', price: 220, quantity: 6),
+        //>>>>>>> 5e960d44fce541ad9e06f2752ddba805654bfee2
       ],
       input: CoinStack(),
       output: CoinStack(),
