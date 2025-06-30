@@ -100,7 +100,7 @@ class ProductsViewWidget extends ConsumerWidget {
                     snack.quantity == 0; // Wahr, wenn der Snack ausverkauft ist
                 return GestureDetector(
                   onTap: () {
-                    appNotifier.chooseSnack(snack);
+                    appNotifier.selectSnack(snack);
                   },
                   child: Card(
                     elevation: snack == selected ? 8 : 2,

@@ -37,7 +37,7 @@ class CoinStack {
     return totalSum;
   }
 
-  /// Return a starting Stack of coins with 3 of each
+  /// Return a starting Stack of coins with 50 of each
   static const CoinStack startCoins = CoinStack({
     10: 50,
     20: 50,
