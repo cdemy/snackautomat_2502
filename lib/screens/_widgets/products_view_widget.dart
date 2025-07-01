@@ -104,13 +104,45 @@ class ProductsViewWidget extends ConsumerWidget {
                         children: [
                           ConstrainedBox(
                             constraints: BoxConstraints(
-                              minHeight: 10,
-                              maxHeight: 350,
+                              minHeight: 8,
+                              maxHeight: 250,
                             ),
-                            child: Image.asset(
-                              _getSnackImagePath(snack.id),
+                            // Gray filter applied to a product that is not available
+                            child: ColorFiltered(
+                              colorFilter: isSoldOut
+                                  ? const ColorFilter.matrix(<double>[
+                                      0.2126,
+                                      0.7152,
+                                      0.0722,
+                                      0,
+                                      0,
+                                      0.2126,
+                                      0.7152,
+                                      0.0722,
+                                      0,
+                                      0,
+                                      0.2126,
+                                      0.7152,
+                                      0.0722,
+                                      0,
+                                      0,
+                                      0,
+                                      0,
+                                      0,
+                                      1,
+                                      0,
+                                    ])
+                                  // This filter does not change anything (used when the product is available)
+                                  : const ColorFilter.mode(
+                                      Colors.transparent,
+                                      BlendMode.multiply,
+                                    ),
+                              child: Image.asset(
+                                _getSnackImagePath(snack.id),
+                              ),
                             ),
                           ),
+
                           Text(
                             snack.name,
                             style: TextStyle(
