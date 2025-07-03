@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/domain/state/app_notifier.dart';
+// import 'package:snackautomat_2502/domain/state/app_state.dart';
 
 class MoneyDisplayOutputWidget extends ConsumerWidget {
   const MoneyDisplayOutputWidget({super.key});
@@ -44,17 +45,44 @@ class MoneyDisplayOutputWidget extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // "Geld entnehmen"-Button
+                // "Buy" button
+                ElevatedButton(
+                  // Button is only active if product is selected and sufficient credit is available
+                  onPressed:
+                      (appState.selectedSnack != null &&
+                          totalUsersBalanceInCents >=
+                              appState.selectedSnack!.price)
+                      ? () {
+                          // Complete the purchase process
+                          appNotifier.doTransaction();
+                        }
+                      : null, // Deactivates the button if conditions are not met
+
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green[700],
+                    foregroundColor: Colors.white,
+                    disabledBackgroundColor: Colors.grey[400],
+                    disabledForegroundColor: Colors.grey[700],
+                  ),
+                  child: Text(
+                    'Kaufen',
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ),
+
+                // “Withdraw money” button
                 ElevatedButton(
                   // Button ist nur aktiv, wenn das aktuelle Guthaben drauf ist
                   onPressed: totalUsersBalanceInEuro > 0
                       ? () {
                           appNotifier.returnCredit();
                         }
-                      : null, // Deaktiviert den Button, wenn kein Guthaben drauf ist
+                      : null, // Deactivates the button if there is no credit
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red[700],
                     foregroundColor: Colors.white,
+                    disabledBackgroundColor: Colors.grey[400],
+                    disabledForegroundColor: Colors.grey[700],
                   ),
                   child: const Text(
                     'Geld entnehmen',
