@@ -15,7 +15,7 @@ class AppNotifier extends Notifier<AppState> {
         Snack(id: '3', name: 'Erdnuss', price: 100, quantity: 8),
         Snack(id: '4', name: 'Milka', price: 200, quantity: 12),
         Snack(id: '5', name: 'Paprika chips', price: 100, quantity: 7),
-        Snack(id: '6', name: 'Paulaner spezi', price: 125, quantity: 9),
+        Snack(id: '6', name: 'Paulaner spezi', price: 230, quantity: 9),
         Snack(id: '7', name: 'Potato chips', price: 200, quantity: 4),
         Snack(
           id: '8',
@@ -47,7 +47,7 @@ class AppNotifier extends Notifier<AppState> {
     final newInput = state.input.addInt(amount);
     state = state.copyWith(input: () => newInput);
     _persistState();
-    doTransaction();
+    // doTransaction();
   }
 
   /// Clear the automate display
@@ -107,7 +107,6 @@ class AppNotifier extends Notifier<AppState> {
       setDisplayMessage("Success! Enjoy your ${boughtSnack!.name}!");
       if (state.selectedSnack != null &&
           state.input.value >= state.selectedSnack!.price) {
-        // TODO: finish the function
         _persistState();
       }
     }
@@ -136,7 +135,7 @@ class AppNotifier extends Notifier<AppState> {
       state = state.copyWith(selectedSnack: () => null);
     }
     _persistState();
-    doTransaction();
+    // doTransaction();
   }
 }
 

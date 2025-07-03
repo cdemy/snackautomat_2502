@@ -43,7 +43,7 @@ class ProductsViewWidget extends ConsumerWidget {
         appState.availableSnacks; //Liste der verfügbaren Produkte
     final selected = appState.selectedSnack;
 
-    const double cardAspectRatio = 0.75;
+    const double cardAspectRatio = 0.60;
     const int crossAxisCount = 3;
 
     return Container(
@@ -105,7 +105,7 @@ class ProductsViewWidget extends ConsumerWidget {
                           ConstrainedBox(
                             constraints: BoxConstraints(
                               minHeight: 8,
-                              maxHeight: 250,
+                              maxHeight: 450,
                             ),
                             // Gray filter applied to a product that is not available
                             child: ColorFiltered(

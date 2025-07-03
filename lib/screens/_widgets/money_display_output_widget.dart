@@ -50,7 +50,7 @@ class MoneyDisplayOutputWidget extends ConsumerWidget {
                   // Button is only active if product is selected and sufficient credit is available
                   onPressed:
                       (appState.selectedSnack != null &&
-                          totalUsersBalanceInEuro >=
+                          totalUsersBalanceInCents >=
                               appState.selectedSnack!.price)
                       ? () {
                           // Complete the purchase process
@@ -62,12 +62,10 @@ class MoneyDisplayOutputWidget extends ConsumerWidget {
                     backgroundColor: Colors.green[700],
                     foregroundColor: Colors.white,
                     disabledBackgroundColor: Colors.grey[400],
-                    disabledForegroundColor: Colors.grey[600],
+                    disabledForegroundColor: Colors.grey[700],
                   ),
                   child: Text(
-                    appState.selectedSnack != null
-                        ? 'Kaufen'
-                        : 'Produkt auswählen',
+                    'Kaufen',
                     style: const TextStyle(fontSize: 14),
                   ),
                 ),
@@ -83,6 +81,8 @@ class MoneyDisplayOutputWidget extends ConsumerWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red[700],
                     foregroundColor: Colors.white,
+                    disabledBackgroundColor: Colors.grey[400],
+                    disabledForegroundColor: Colors.grey[700],
                   ),
                   child: const Text(
                     'Geld entnehmen',
