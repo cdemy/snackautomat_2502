@@ -1,5 +1,6 @@
 /// Class CoinStack with static coin values
 class CoinStack {
+  /// Possible coin values for snackautomate
   static const Set<int> potentialCoinValues = {10, 20, 50, 100, 200};
   final Map<int, int> _coins;
 
@@ -16,9 +17,9 @@ class CoinStack {
 
   /// Return list of coins
   List<int> get asInts {
-    List<int> result = [];
-    for (var entry in _coins.entries) {
-      for (int i = 0; i < entry.value; i++) {
+    final result = <int>[];
+    for (final entry in _coins.entries) {
+      for (var i = 0; i < entry.value; i++) {
         result.add(entry.key);
       }
     }
@@ -98,7 +99,8 @@ class CoinStack {
   /// then we compare values (quantity of each coin value) using the loop
 
   bool isEqual(CoinStack other) {
-    if (Set.from(coins.keys) != Set.from(other.coins.keys)) return false;
+    if (Set<int>.from(coins.keys) != Set<int>.from(other.coins.keys))
+      return false;
     for (var key in coins.keys) {
       if (coins[key] != other.coins[key]) return false;
     }

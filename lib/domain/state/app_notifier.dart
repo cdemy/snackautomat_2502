@@ -95,7 +95,7 @@ class AppNotifier extends Notifier<AppState> {
       final updatedOutput = state.output.merge(changeCoins!); // give change
       final clearedInput = const CoinStack(); // clear input
       final boughtSnack = state.selectedSnack;
-      final clearedSelection = null; // remove selection of snack
+      final Snack? clearedSelection = null; // remove selection of snack
 
       state = state.copyWith(
         availableSnacks: () => updatedSnackQuantity,

@@ -21,7 +21,7 @@ Future<AppState?> loadAppState() async {
     final jsonString = prefs.getString(_appStateKey);
     if (jsonString == null) return null;
     final jsonMap = jsonDecode(jsonString);
-    return AppState.fromJson(jsonMap);
+    return AppState.fromJson(jsonMap as Map<String, dynamic>);
   } catch (e) {
     print("Fehler beim Laden des AppState: $e");
     return null;
