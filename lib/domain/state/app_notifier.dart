@@ -3,39 +3,36 @@ import 'package:snackautomat_2502/models/snack.dart';
 import 'package:snackautomat_2502/models/coinstack.dart';
 import 'package:snackautomat_2502/domain/state/app_state.dart';
 import 'package:snackautomat_2502/services/persistence.dart'; // hinzufügen
+import 'package:snackautomat_2502/services/database_simulator.dart';
 
 class AppNotifier extends Notifier<AppState> {
   @override
   AppState build() {
     _loadInitialState();
     return const AppState(
-      availableSnacks: [
-        Snack(id: '1', name: 'Haribo', price: 120, quantity: 8),
-        Snack(id: '2', name: 'Knoppers', price: 250, quantity: 5),
-        Snack(id: '3', name: 'Erdnuss', price: 100, quantity: 8),
-        Snack(id: '4', name: 'Milka', price: 200, quantity: 12),
-        Snack(id: '5', name: 'Paprika chips', price: 100, quantity: 7),
-        Snack(id: '6', name: 'Paulaner spezi', price: 230, quantity: 9),
-        Snack(id: '7', name: 'Potato chips', price: 200, quantity: 4),
-        Snack(
-          id: '8',
-          name: 'Sour cream onion chips',
-          price: 250,
-          quantity: 15,
-        ),
-        Snack(id: '9', name: 'Tuc cracker', price: 150, quantity: 6),
-      ],
+      availableSnacks: [],
       input: CoinStack(),
       output: CoinStack(),
       machine: CoinStack.startCoins,
     );
   }
 
+  // Future<void> _loadInitialState() async {
+  //   print("Loading initial state...");
+  //   final loaded = await DatabaseSimulator.getInitialAppState();
+  //   print("Initial state loaded: $loaded");
+  //   state = loaded;
+  // }
+
   Future<void> _loadInitialState() async {
-    final loaded = await loadAppState();
-    if (loaded != null) {
-      state = loaded;
-    }
+    print("Loading initial state...");
+    final loaded = DatabaseSimulator.getInitialAppState().then(
+      (value) => {
+        state = value,
+        print("Initial state loading FINISHED: $value"),
+      },
+    );
+    print("Initial state loading RUNS: $loaded");
   }
 
   Future<void> _persistState() async {
