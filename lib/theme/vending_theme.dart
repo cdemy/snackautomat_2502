@@ -12,7 +12,6 @@ final ThemeData darkVendingMachineTheme = ThemeData(
     primary: Color(0xFFB0B0B0), // Light metalic
     secondary: Color(0xFFE53935), // Red button
     surface: Color(0xFF4A5C6A), // Steel blue
-    onPrimary: Colors.black,
     onSecondary: Colors.white,
   ),
   appBarTheme: const AppBarTheme(
@@ -27,10 +26,10 @@ final ThemeData darkVendingMachineTheme = ThemeData(
   buttonTheme: const ButtonThemeData(
     buttonColor: Color(0xFFE53935), // Red buttons
   ),
-  extensions: [
+  extensions: const [
     CustomColors(
-      background: const Color.fromARGB(55, 0, 0, 0),
-      coinInputWidgetBackground: const Color.fromARGB(255, 103, 119, 83),
+      background: Color.fromARGB(55, 0, 0, 0),
+      coinInputWidgetBackground: Color.fromARGB(255, 103, 119, 83),
       moneyDisplayInputBackground: Colors.white10,
       moneyDisplayPriceBackground: Colors.amber,
       productsViewBackground: Colors.greenAccent,
@@ -69,10 +68,10 @@ final ThemeData lightVendingMachineTheme = ThemeData(
   // buttonTheme: const ButtonThemeData(
   //   buttonColor: Color(0xFFE53935), // Red buttons
   // ),
-  extensions: [
+  extensions: const [
     CustomColors(
       background: Color.fromARGB(255, 97, 97, 97),
-      coinInputWidgetBackground: const Color.fromARGB(255, 126, 146, 102),
+      coinInputWidgetBackground: Color.fromARGB(255, 126, 146, 102),
       moneyDisplayInputBackground: Color.fromARGB(255, 104, 128, 147),
       moneyDisplayPriceBackground: Color.fromARGB(255, 229, 222, 158),
       productsViewBackground: Color(0xFFB0B0B0),

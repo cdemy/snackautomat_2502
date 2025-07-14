@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snackautomat_2502/domain/state/app_notifier.dart';
 import 'package:snackautomat_2502/theme/theme_extentions.dart';
 
+/// Widget representing the view of snacks in the snackautomate
 class ProductsViewWidget extends ConsumerWidget {
+  /// Regular constructor
   const ProductsViewWidget({super.key});
 
   /// Method to get the path to the product image
@@ -36,22 +38,21 @@ class ProductsViewWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Bei änderung wird ein Rebuild ausgelöst
+    // State changes triggering rebuild of the widget
     final appState = ref.watch(appNotifierProvider);
     final appNotifier = ref.read(appNotifierProvider.notifier);
-    final availableSnacks =
-        appState.availableSnacks; //Liste der verfügbaren Produkte
+    final availableSnacks = appState.availableSnacks;
     final selected = appState.selectedSnack;
 
-    const double cardAspectRatio = 0.60;
-    const int crossAxisCount = 3;
+    const cardAspectRatio = 0.60;
+    const crossAxisCount = 3;
 
     return Container(
       color: context.appColors.productsViewBackground,
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: availableSnacks.isEmpty
           ? const Center(
-              // Wird angezeigt, wenn keine Snacks mehr da sind
+              // Show text if no snacks are available
               child: Text(
                 'Keine Snacks verfügbar',
                 style: TextStyle(
@@ -64,14 +65,14 @@ class ProductsViewWidget extends ConsumerWidget {
           : GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: crossAxisCount,
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
                 childAspectRatio: cardAspectRatio,
               ),
               itemCount: availableSnacks.length,
               itemBuilder: (context, index) {
                 final snack = availableSnacks[index]; // Das aktuelle Produkt
-                final bool isSoldOut =
+                final isSoldOut =
                     snack.quantity == 0; // Wahr, wenn der Snack ausverkauft ist
                 return GestureDetector(
                   onTap: () {
@@ -84,26 +85,26 @@ class ProductsViewWidget extends ConsumerWidget {
                         : context.appColors.productViewIconBackground,
                     shape: snack == selected
                         ? RoundedRectangleBorder(
-                            side: BorderSide(
+                            side: const BorderSide(
                               color: Color(0xFF00E676),
                               width: 3,
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(8),
                           )
                         : RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                              8.0,
+                              8,
                             ),
                           ),
                     child: Padding(
                       padding: const EdgeInsets.all(
-                        8.0,
+                        8,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           ConstrainedBox(
-                            constraints: BoxConstraints(
+                            constraints: const BoxConstraints(
                               minHeight: 8,
                               maxHeight: 450,
                             ),

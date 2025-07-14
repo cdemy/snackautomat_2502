@@ -10,5 +10,6 @@ import 'package:snackautomat_2502/theme/custom_colors.dart';
 /// ```
 
 extension ThemeColorExtentions on BuildContext {
+  /// Some comments
   CustomColors get appColors => Theme.of(this).extension<CustomColors>()!;
 }

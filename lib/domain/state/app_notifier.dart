@@ -1,9 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:snackautomat_2502/models/snack.dart';
-import 'package:snackautomat_2502/models/coinstack.dart';
 import 'package:snackautomat_2502/domain/state/app_state.dart';
-import 'package:snackautomat_2502/services/persistence.dart'; // hinzufügen
+import 'package:snackautomat_2502/models/coinstack.dart';
+import 'package:snackautomat_2502/models/snack.dart';
+import 'package:snackautomat_2502/services/persistence.dart';
 
+/// Class AppNotifier handles the App State changes
 class AppNotifier extends Notifier<AppState> {
   @override
   AppState build() {
@@ -25,8 +26,6 @@ class AppNotifier extends Notifier<AppState> {
         ),
         Snack(id: '9', name: 'Tuc cracker', price: 150, quantity: 6),
       ],
-      input: CoinStack(),
-      output: CoinStack(),
       machine: CoinStack.startCoins,
     );
   }
@@ -93,9 +92,9 @@ class AppNotifier extends Notifier<AppState> {
         changeAmount,
       ); // calculate change
       final updatedOutput = state.output.merge(changeCoins!); // give change
-      final clearedInput = const CoinStack(); // clear input
+      const clearedInput = CoinStack(); // clear input
       final boughtSnack = state.selectedSnack;
-      final Snack? clearedSelection = null; // remove selection of snack
+      const Snack? clearedSelection = null; // remove selection of snack
 
       state = state.copyWith(
         availableSnacks: () => updatedSnackQuantity,
@@ -104,7 +103,7 @@ class AppNotifier extends Notifier<AppState> {
         input: () => clearedInput,
         selectedSnack: () => clearedSelection,
       );
-      setDisplayMessage("Success! Enjoy your ${boughtSnack!.name}!");
+      setDisplayMessage('Success! Enjoy your ${boughtSnack!.name}!');
       if (state.selectedSnack != null &&
           state.input.value >= state.selectedSnack!.price) {
         _persistState();
@@ -120,8 +119,8 @@ class AppNotifier extends Notifier<AppState> {
 
   /// Return inserted coins and clear input
   void returnCredit() {
-    state = state.copyWith(input: () => CoinStack());
-    state = state.copyWith(output: () => CoinStack());
+    state = state.copyWith(input: CoinStack.new);
+    state = state.copyWith(output: CoinStack.new);
     _persistState();
   }
 
