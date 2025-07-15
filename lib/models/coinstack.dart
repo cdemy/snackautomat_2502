@@ -1,5 +1,6 @@
 /// Class CoinStack with static coin values
 class CoinStack {
+  /// Possible coin values for snackautomate
   static const Set<int> potentialCoinValues = {10, 20, 50, 100, 200};
   final Map<int, int> _coins;
 
@@ -16,9 +17,9 @@ class CoinStack {
 
   /// Return list of coins
   List<int> get asInts {
-    List<int> result = [];
-    for (var entry in _coins.entries) {
-      for (int i = 0; i < entry.value; i++) {
+    final result = <int>[];
+    for (final entry in _coins.entries) {
+      for (var i = 0; i < entry.value; i++) {
         result.add(entry.key);
       }
     }
@@ -30,8 +31,8 @@ class CoinStack {
 
   /// Return the value of the stack
   int get value {
-    int totalSum = 0;
-    for (var entry in _coins.entries) {
+    var totalSum = 0;
+    for (final entry in _coins.entries) {
       totalSum += entry.key * entry.value;
     }
     return totalSum;
@@ -54,8 +55,8 @@ class CoinStack {
 
   /// Add coins to the stack
   CoinStack addInts(List<int> values) {
-    CoinStack coinStack = copy();
-    for (var value in values) {
+    var coinStack = copy();
+    for (final value in values) {
       coinStack = coinStack.addInt(value);
     }
     return coinStack;
@@ -64,7 +65,7 @@ class CoinStack {
   /// Remove the coin from the stack
   CoinStack removeInt(int value) {
     if (!potentialCoinValues.contains(value)) {
-      throw ArgumentError("Coin value not possible");
+      throw ArgumentError('Coin value not possible');
     }
     final result = copy().subtract(CoinStack.fromInt(value));
     return result;
@@ -72,8 +73,8 @@ class CoinStack {
 
   /// Remove coins from the stack
   CoinStack removeInts(List<int> values) {
-    CoinStack coinStack = copy();
-    for (var value in values) {
+    var coinStack = copy();
+    for (final value in values) {
       coinStack = coinStack.subtract(CoinStack.fromInt(value));
     }
     return coinStack;
@@ -98,8 +99,10 @@ class CoinStack {
   /// then we compare values (quantity of each coin value) using the loop
 
   bool isEqual(CoinStack other) {
-    if (Set.from(coins.keys) != Set.from(other.coins.keys)) return false;
-    for (var key in coins.keys) {
+    if (Set<int>.from(coins.keys) != Set<int>.from(other.coins.keys)) {
+      return false;
+    }
+    for (final key in coins.keys) {
       if (coins[key] != other.coins[key]) return false;
     }
     return true;
@@ -112,7 +115,7 @@ class CoinStack {
 
   /// Check if first stack contains the second inside
   bool contains(CoinStack other) {
-    for (var entry in other._coins.entries) {
+    for (final entry in other._coins.entries) {
       if ((_coins[entry.key] ?? 0) < entry.value) return false;
     }
     return true;
@@ -128,14 +131,14 @@ class CoinStack {
   /// If we reached zero, function returns TRUE (we succeed) or returns FALSE if we didn't.
 
   bool canGiveChange(int value) {
-    int changeToGive = value;
-    List<int> coinsBigToSmall = _coins.keys.toList()
+    var changeToGive = value;
+    final coinsBigToSmall = _coins.keys.toList()
       ..sort((a, b) => b.compareTo(a)); // list of coins from big to small
-    for (var coinValue in coinsBigToSmall) {
-      int availableCoins = _coins[coinValue] ?? 0; //available coins in stack
-      int neededCoins =
+    for (final coinValue in coinsBigToSmall) {
+      final availableCoins = _coins[coinValue] ?? 0; //available coins in stack
+      final neededCoins =
           changeToGive ~/ coinValue; //coins we could use to give change
-      int coinsToUse = neededCoins <= availableCoins
+      final coinsToUse = neededCoins <= availableCoins
           ? neededCoins
           : availableCoins; // we take coins that are available for us
       changeToGive -= coinsToUse * coinValue;
@@ -155,7 +158,7 @@ class CoinStack {
   CoinStack? giveChange(int value) {
     if (!canGiveChange(value)) return null;
     final result = <int, int>{}; // here we keep change stack
-    int changeToGive = value;
+    var changeToGive = value;
     final coinsBigToSmall = _coins.keys.toList()
       ..sort((a, b) => b.compareTo(a));
     for (final coinValue in coinsBigToSmall) {
@@ -178,8 +181,8 @@ class CoinStack {
   /// and return new stack in the end.
 
   CoinStack merge(CoinStack other) {
-    Map<int, int> merged = Map.from(_coins); // do copy from stack this
-    for (var entry in other._coins.entries) {
+    final merged = Map<int, int>.from(_coins); // do copy from stack this
+    for (final entry in other._coins.entries) {
       merged[entry.key] = (merged[entry.key] ?? 0) + entry.value;
     }
     return CoinStack(merged);
@@ -190,10 +193,10 @@ class CoinStack {
   /// and return new stack in the end. If coin count is below zero, we remove the coin.
 
   CoinStack subtract(CoinStack other) {
-    Map<int, int> result = Map.from(_coins);
-    for (var entry in other._coins.entries) {
-      int currentCount = result[entry.key] ?? 0;
-      int newCount = currentCount - entry.value;
+    final result = Map<int, int>.from(_coins);
+    for (final entry in other._coins.entries) {
+      final currentCount = result[entry.key] ?? 0;
+      final newCount = currentCount - entry.value;
       if (newCount == 0) {
         result.remove(entry.key);
       } else if (newCount < 0) {
@@ -209,8 +212,8 @@ class CoinStack {
   /// we multiply each coin by a factor and return result.
 
   CoinStack multiply(int factor) {
-    Map<int, int> result = {};
-    for (var entry in _coins.entries) {
+    final result = <int, int>{};
+    for (final entry in _coins.entries) {
       result[entry.key] = entry.value * factor;
     }
     return CoinStack(result);
@@ -222,9 +225,9 @@ class CoinStack {
 
   CoinStack divide(int factor) {
     if (factor <= 0) return this;
-    Map<int, int> result = {};
-    for (var entry in _coins.entries) {
-      int newCount = entry.value ~/ factor;
+    final result = <int, int>{};
+    for (final entry in _coins.entries) {
+      final newCount = entry.value ~/ factor;
       if (newCount > 0) {
         result[entry.key] = newCount;
       }

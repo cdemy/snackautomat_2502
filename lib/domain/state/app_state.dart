@@ -1,16 +1,29 @@
 import 'package:flutter/foundation.dart';
-import 'package:snackautomat_2502/models/snack.dart';
 import 'package:snackautomat_2502/models/coinstack.dart';
+import 'package:snackautomat_2502/models/snack.dart';
 
-@immutable // Klasse kann nicht verändert werden
+@immutable
+/// Class AppState that keeps the state of the whole app as an object
 class AppState {
+  /// List of available Snacks
   final List<Snack> availableSnacks;
+
+  /// Coins those user has added
   final CoinStack input;
+
+  /// Coins those we have inside the snackautomate
   final CoinStack machine;
+
+  /// Coins that we have to return to the user
   final CoinStack output;
+
+  /// Message that user sees at the screen of snackautomate
   final String? displayMessage;
+
+  /// Represents the snack selected by user
   final Snack? selectedSnack;
 
+  /// Regular constructor
   const AppState({
     this.availableSnacks = const [],
     this.input = const CoinStack(),
@@ -20,6 +33,7 @@ class AppState {
     this.selectedSnack,
   });
 
+  /// Returns new App State object from old App State object with some attribute changes
   AppState copyWith({
     List<Snack> Function()? availableSnacks,
     List<Snack> Function()? cartItems,
@@ -76,7 +90,7 @@ class AppState {
     return 'AppState{availableSnacks: $availableSnacks, input: $input, output: $output, machine: $machine, selectedSnack: $selectedSnack, displayMessage: $displayMessage}';
   }
 
-  //.toJson() and .fromJson()
+  /// Transform data to JSON
   Map<String, dynamic> toJson() => {
     'availableSnacks': availableSnacks.map((s) => s.toJson()).toList(),
     'input': input.toJson(),
@@ -86,6 +100,7 @@ class AppState {
     'selectedSnack': selectedSnack?.toJson(),
   };
 
+  /// Transform data from JSON
   factory AppState.fromJson(Map<String, dynamic> json) => AppState(
     availableSnacks: (json['availableSnacks'] as List)
         .map((e) => Snack.fromJson(e as Map<String, dynamic>))
@@ -93,7 +108,7 @@ class AppState {
     input: CoinStack.fromJson(json['input'] as Map<String, dynamic>),
     output: CoinStack.fromJson(json['output'] as Map<String, dynamic>),
     machine: CoinStack.fromJson(json['machine'] as Map<String, dynamic>),
-    displayMessage: json['displayMessage'],
+    displayMessage: json['displayMessage'] as String?,
     selectedSnack: json['selectedSnack'] != null
         ? Snack.fromJson(json['selectedSnack'] as Map<String, dynamic>)
         : null,

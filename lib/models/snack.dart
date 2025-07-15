@@ -1,12 +1,21 @@
 import 'package:flutter/foundation.dart';
 
-@immutable // Klasse kann nicht verändert werden
+/// Class Snack with attributes, that immutable is
+@immutable
 class Snack {
+  /// ID number of the Snack
   final String id;
+
+  /// Name of the Snack
   final String name;
+
+  /// Price of the Snack
   final int price;
+
+  /// Quantity of the Snack
   final int quantity;
 
+  /// Regular constructor
   const Snack({
     required this.id,
     required this.name,
@@ -14,6 +23,7 @@ class Snack {
     required this.quantity,
   });
 
+  /// Returns new Snack object from old Snack object with some attribute changes
   Snack copyWith({String? id, String? name, int? price, int? quantity}) {
     return Snack(
       id: id ?? this.id,
@@ -42,7 +52,7 @@ class Snack {
     return 'Snack{id: $id, name: $name, price: $price, quantity: $quantity}';
   }
 
-  //serializing
+  /// Create Snack object from JSON map (Serializing)
   factory Snack.fromJson(Map<String, dynamic> json) => Snack(
     id: json['id'] as String,
     name: json['name'] as String,
@@ -50,6 +60,7 @@ class Snack {
     quantity: json['quantity'] as int,
   );
 
+  /// Create JSON from Snack object
   Map<String, dynamic> toJson() => {
     'id': id,
     'name': name,
