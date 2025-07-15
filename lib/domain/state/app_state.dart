@@ -108,7 +108,7 @@ class AppState {
     input: CoinStack.fromJson(json['input'] as Map<String, dynamic>),
     output: CoinStack.fromJson(json['output'] as Map<String, dynamic>),
     machine: CoinStack.fromJson(json['machine'] as Map<String, dynamic>),
-    displayMessage: json['displayMessage'] as String,
+    displayMessage: json['displayMessage'] as String?,
     selectedSnack: json['selectedSnack'] != null
         ? Snack.fromJson(json['selectedSnack'] as Map<String, dynamic>)
         : null,

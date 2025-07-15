@@ -15,9 +15,9 @@ class AppNotifier extends Notifier<AppState> {
         Snack(id: '2', name: 'Knoppers', price: 250, quantity: 5),
         Snack(id: '3', name: 'Erdnuss', price: 100, quantity: 8),
         Snack(id: '4', name: 'Milka', price: 200, quantity: 12),
-        Snack(id: '5', name: 'Paprika chips', price: 100, quantity: 7),
-        Snack(id: '6', name: 'Paulaner spezi', price: 230, quantity: 9),
-        Snack(id: '7', name: 'Potato chips', price: 200, quantity: 4),
+        Snack(id: '5', name: 'Paprika Chips', price: 100, quantity: 7),
+        Snack(id: '6', name: 'Paulaner Spezi', price: 230, quantity: 9),
+        Snack(id: '7', name: 'Potato Chips', price: 200, quantity: 4),
         Snack(
           id: '8',
           name: 'Sour cream onion chips',
@@ -104,10 +104,11 @@ class AppNotifier extends Notifier<AppState> {
         selectedSnack: () => clearedSelection,
       );
       setDisplayMessage('Success! Enjoy your ${boughtSnack!.name}!');
-      if (state.selectedSnack != null &&
-          state.input.value >= state.selectedSnack!.price) {
-        _persistState();
-      }
+      //      if (state.selectedSnack != null &&
+      //        state.input.value >= state.selectedSnack!.price) {
+      _persistState();
+      //  }
+
     }
   }
 
