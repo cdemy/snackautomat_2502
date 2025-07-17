@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 @immutable
 class Snack {
   /// ID number of the Snack
-  final String id;
+  final int id;
 
   /// Name of the Snack
   final String name;
@@ -24,7 +24,7 @@ class Snack {
   });
 
   /// Returns new Snack object from old Snack object with some attribute changes
-  Snack copyWith({String? id, String? name, int? price, int? quantity}) {
+  Snack copyWith({int? id, String? name, int? price, int? quantity}) {
     return Snack(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -54,7 +54,7 @@ class Snack {
 
   /// Create Snack object from JSON map (Serializing)
   factory Snack.fromJson(Map<String, dynamic> json) => Snack(
-    id: json['id'] as String,
+    id: json['id'] as int,
     name: json['name'] as String,
     price: json['price'] as int,
     quantity: json['quantity'] as int,

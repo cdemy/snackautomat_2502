@@ -2,12 +2,23 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:snackautomat_2502/domain/state/app_state.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+final supabase = Supabase.instance.client;
 
 /// Loads the app state from the database
 Future<AppState?> loadAppState() async {
   try {
+    final response = await supabase.from('snack').select();
+    final data = response;
+    final dataInJSON = jsonEncode(data);
+    print(dataInJSON);
+
     final prefs = await SharedPreferences.getInstance();
     final jsonString = prefs.getString(_appStateKey);
+    // jsonString['availableSnacks'] = dataInJSON;
+    // jsonDecode(jsonString);
+    print(jsonString);
     if (jsonString == null) return null;
     final jsonMap = jsonDecode(jsonString);
     return AppState.fromJson(
