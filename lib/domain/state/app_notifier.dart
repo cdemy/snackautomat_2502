@@ -11,20 +11,20 @@ class AppNotifier extends Notifier<AppState> {
     _loadInitialState();
     return const AppState(
       availableSnacks: [
-        Snack(id: '1', name: 'Haribo', price: 120, quantity: 8),
-        Snack(id: '2', name: 'Knoppers', price: 250, quantity: 5),
-        Snack(id: '3', name: 'Erdnuss', price: 100, quantity: 8),
-        Snack(id: '4', name: 'Milka', price: 200, quantity: 12),
-        Snack(id: '5', name: 'Paprika Chips', price: 100, quantity: 7),
-        Snack(id: '6', name: 'Paulaner Spezi', price: 230, quantity: 9),
-        Snack(id: '7', name: 'Potato Chips', price: 200, quantity: 4),
+        Snack(id: 1, name: 'Haribo', price: 120, quantity: 8),
+        Snack(id: 2, name: 'Knoppers', price: 250, quantity: 5),
+        Snack(id: 3, name: 'Erdnuss', price: 100, quantity: 8),
+        Snack(id: 4, name: 'Milka', price: 200, quantity: 12),
+        Snack(id: 5, name: 'Paprika Chips', price: 100, quantity: 7),
+        Snack(id: 6, name: 'Paulaner Spezi', price: 230, quantity: 9),
+        Snack(id: 7, name: 'Potato Chips', price: 200, quantity: 4),
         Snack(
-          id: '8',
-          name: 'Sour cream onion chips',
+          id: 8,
+          name: 'Sour Cream Onion Chips',
           price: 250,
           quantity: 15,
         ),
-        Snack(id: '9', name: 'Tuc cracker', price: 150, quantity: 6),
+        Snack(id: 9, name: 'Tuc Cracker', price: 150, quantity: 6),
       ],
       machine: CoinStack.startCoins,
     );
@@ -108,7 +108,6 @@ class AppNotifier extends Notifier<AppState> {
       //        state.input.value >= state.selectedSnack!.price) {
       _persistState();
       //  }
-
     }
   }
 

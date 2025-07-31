@@ -9,25 +9,25 @@ class ProductsViewWidget extends ConsumerWidget {
   const ProductsViewWidget({super.key});
 
   /// Method to get the path to the product image
-  String _getSnackImagePath(String snackId) {
+  String _getSnackImagePath(int snackId) {
     switch (snackId) {
-      case '1':
+      case 1:
         return 'assets/images/products/haribo_schluempfe.png';
-      case '2':
+      case 2:
         return 'assets/images/products/knoppers.png';
-      case '3':
+      case 3:
         return 'assets/images/products/lorenz_erdnuss.png';
-      case '4':
+      case 4:
         return 'assets/images/products/milka.png';
-      case '5':
+      case 5:
         return 'assets/images/products/paprika_chips.png';
-      case '6':
+      case 6:
         return 'assets/images/products/paulaner_spezi.png';
-      case '7':
+      case 7:
         return 'assets/images/products/potato_chips.png';
-      case '8':
+      case 8:
         return 'assets/images/products/sour_cream_onion_chips.png';
-      case '9':
+      case 9:
         return 'assets/images/products/tuc_cracker.png';
 
       /// Fallback image in case something is wrong
