@@ -3,6 +3,7 @@ import 'package:snackautomat_2502/domain/state/app_state.dart';
 import 'package:snackautomat_2502/models/coinstack.dart';
 import 'package:snackautomat_2502/models/snack.dart';
 import 'package:snackautomat_2502/services/persistence.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Class AppNotifier handles the App State changes
 class AppNotifier extends Notifier<AppState> {
@@ -41,11 +42,76 @@ class AppNotifier extends Notifier<AppState> {
     await saveAppState(state);
   }
 
+  Future<void> _updateDatabaseSnacks() async {
+    try {
+      final supabase = Supabase.instance.client;
+
+      for (final snack in state.availableSnacks) {
+        if (snack.id != null) {
+          await supabase.from('snack').upsert({
+            'id': snack.id,
+            'name': snack.name,
+            'price': snack.price,
+            'quantity': snack.quantity,
+          });
+        }
+      }
+    } catch (e) {
+      print('Supabase Sync Failure: $e');
+    }
+  }
+
+  /// update database machinecoinstack
+  Future<void> _updateMachineCoinstack() async {
+    try {
+      final supabase = Supabase.instance.client;
+      for (final entry in state.machine.coins.entries) {
+        await supabase.from('machinecoinstack').upsert({
+          'denomination': entry.key,
+          'quantity': entry.value,
+        });
+      }
+    } catch (e) {
+      print('Supabase Sync Failure: $e');
+    }
+  }
+
+  /// update database machinecoinstack
+  Future<void> _updateInputCoinstack() async {
+    try {
+      final supabase = Supabase.instance.client;
+      for (final entry in state.input.coins.entries) {
+        await supabase.from('inputcoinstack').upsert({
+          'denomination': entry.key,
+          'quantity': entry.value,
+        });
+      }
+    } catch (e) {
+      print('Supabase Sync Failure: $e');
+    }
+  }
+
+  /// update database machinecoinstack
+  Future<void> _updateOutputCoinstack() async {
+    try {
+      final supabase = Supabase.instance.client;
+      for (final entry in state.output.coins.entries) {
+        await supabase.from('outputcoinstack').upsert({
+          'denomination': entry.key,
+          'quantity': entry.value,
+        });
+      }
+    } catch (e) {
+      print('Supabase Sync Failure: $e');
+    }
+  }
+
   /// Add coin to input and try to perform a transaction
   void addInput(int amount) {
     final newInput = state.input.addInt(amount);
     state = state.copyWith(input: () => newInput);
     _persistState();
+    _updateInputCoinstack();
     // doTransaction();
   }
 
@@ -103,10 +169,17 @@ class AppNotifier extends Notifier<AppState> {
         input: () => clearedInput,
         selectedSnack: () => clearedSelection,
       );
+
+      print('clearedInput');
+      print(clearedInput);
       setDisplayMessage('Success! Enjoy your ${boughtSnack!.name}!');
       //      if (state.selectedSnack != null &&
       //        state.input.value >= state.selectedSnack!.price) {
       _persistState();
+      _updateDatabaseSnacks();
+      _updateMachineCoinstack();
+      _updateInputCoinstack();
+      _updateOutputCoinstack();
       //  }
     }
   }
@@ -122,6 +195,8 @@ class AppNotifier extends Notifier<AppState> {
     state = state.copyWith(input: CoinStack.new);
     state = state.copyWith(output: CoinStack.new);
     _persistState();
+    _updateInputCoinstack();
+    _updateOutputCoinstack();
   }
 
   /// If selected snack is available and different from current, select it;

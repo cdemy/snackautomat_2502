@@ -5,7 +5,16 @@ class CoinStack {
   final Map<int, int> _coins;
 
   /// Regular constructor
-  const CoinStack([this._coins = const {}]);
+  // const CoinStack([this._coins = const {}]);
+  const CoinStack([
+    this._coins = const {
+      10: 0,
+      20: 0,
+      50: 0,
+      100: 0,
+      200: 0,
+    },
+  ]);
 
   /// Named constructor to create a stack with a single coin of the given value
   CoinStack.fromInt(int value)
